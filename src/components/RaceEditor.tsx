@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
-import { RATING_LABEL, type Party, type Race, type Result } from '../data/types'
+import { RATING_LABEL, type Party, type Race, type Result, type Snapshot } from '../data/types'
+import { reportingText } from '../lib/tally'
+import { Trend, trendParties } from './Trend'
 
 interface Props {
   race: Race
   result?: Result
+  history?: Snapshot[]
   onSave: (result: Result | null) => void
   onClose: () => void
 }
@@ -11,7 +14,7 @@ interface Props {
 const numOrUndef = (s: string) => (s.trim() === '' ? undefined : Number(s))
 
 // Side panel for entering returns and calling a race on election night.
-export function RaceEditor({ race, result, onSave, onClose }: Props) {
+export function RaceEditor({ race, result, history, onSave, onClose }: Props) {
   const parties: Party[] = race.candidates ? race.candidates.map((c) => c.party) : ['D', 'R']
   const [winner, setWinner] = useState<Party | ''>(result?.winner ?? '')
   const [called, setCalled] = useState(!!result?.called)
@@ -33,10 +36,13 @@ export function RaceEditor({ race, result, onSave, onClose }: Props) {
       const v = numOrUndef(pct[p])
       if (v !== undefined && !Number.isNaN(v)) pctOut[p] = v
     }
+    const reportingNum = numOrUndef(reporting)
     const next: Result = {
       winner: winner || undefined,
       called: called && !!winner,
-      reporting: numOrUndef(reporting),
+      reporting: reportingNum,
+      // Feed numbers are precincts; a hand-typed figure is treated as expected vote.
+      reportingKind: reportingNum === result?.reporting ? result?.reportingKind : 'expected',
       pct: Object.keys(pctOut).length ? pctOut : undefined,
       note: note.trim() || undefined,
     }
@@ -61,6 +67,25 @@ export function RaceEditor({ race, result, onSave, onClose }: Props) {
           Cook: {RATING_LABEL[race.rating]} · Held by {race.held} · {race.incumbent === 'Open' ? 'Open seat' : `Inc. ${race.incumbent}`}
           {race.note && <> · {race.note}</>}
         </p>
+
+        {result?.source && (
+          <div className="feed-info">
+            <b>Live from {result.source}</b>
+            <span className="muted">
+              {result.fetchedAt && <>Updated {new Date(result.fetchedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} · </>}
+              {result.totalVotes != null && <>{result.totalVotes.toLocaleString()} votes · </>}
+              {reportingText(result)}
+            </span>
+            <span className="muted">Numbers below refresh every 2 minutes; edits to them get overwritten.</span>
+          </div>
+        )}
+
+        {history && history.length > 0 && (
+          <fieldset>
+            <legend>Margin over the night</legend>
+            <Trend snapshots={history} parties={trendParties(history)} height={90} detailed />
+          </fieldset>
+        )}
 
         <fieldset>
           <legend>Vote share (%)</legend>

@@ -1,6 +1,7 @@
 import { POLLS } from '../data/polls'
-import { RATING_LABEL, type Party, type Race, type Result } from '../data/types'
-import { isFlip, leader } from '../lib/tally'
+import { RATING_LABEL, type Party, type Race, type Result, type Snapshot } from '../data/types'
+import { isFlip, leader, reportingText } from '../lib/tally'
+import { Trend, trendParties } from './Trend'
 
 export const PARTY_NAME: Record<Party, string> = { D: 'Dem', R: 'GOP', I: 'Ind' }
 
@@ -19,10 +20,11 @@ export function pollSummary(race: Race): { text: string; party: Party | null; ti
 interface Props {
   race: Race
   result?: Result
+  history?: Snapshot[]
   onSelect: (race: Race) => void
 }
 
-export function RaceCard({ race, result, onSelect }: Props) {
+export function RaceCard({ race, result, history, onSelect }: Props) {
   const lead = leader(result)
   const flip = isFlip(race, result)
   const poll = pollSummary(race)
@@ -59,7 +61,7 @@ export function RaceCard({ race, result, onSelect }: Props) {
         ) : lead ? (
           <span className="status">
             {PARTY_NAME[lead.party]} +{lead.margin.toFixed(1)}
-            {result?.reporting != null && <span className="muted"> · {result.reporting}% in</span>}
+            {result?.reporting != null && <span className="muted"> · {reportingText(result)}</span>}
           </span>
         ) : (
           <span className="muted">Held by {PARTY_NAME[race.held]}</span>
@@ -70,6 +72,7 @@ export function RaceCard({ race, result, onSelect }: Props) {
           </span>
         )}
       </div>
+      {history && history.length > 1 && <Trend snapshots={history} parties={trendParties(history)} />}
     </button>
   )
 }

@@ -77,6 +77,11 @@ export function resultTally(races: Race[], results: Record<string, Result>): Res
   return { called, uncalled, flips }
 }
 
+export function reportingText(res?: Result): string | null {
+  if (res?.reporting == null) return null
+  return res.reportingKind === 'precincts' ? `${res.reporting}% of precincts` : `${res.reporting}% in`
+}
+
 export function isFlip(race: Race, res?: Result) {
   return !!(res?.called && res.winner && res.winner !== race.held)
 }

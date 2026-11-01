@@ -4,8 +4,8 @@ import { RaceCard, pollSummary } from './components/RaceCard'
 import { POLLS_AS_OF } from './data/polls'
 import { RaceEditor } from './components/RaceEditor'
 import { UsMap } from './components/UsMap'
-import { RATINGS, RATING_LABEL, type Chamber, type Race, type Rating, type Result } from './data/types'
-import { CHAMBERS, favoredParty, isCompetitive, isFlip, leader, ratingCounts, resultTally, type ChamberInfo } from './lib/tally'
+import { RATINGS, RATING_LABEL, type Chamber, type Race, type Rating, type Result, type Snapshot } from './data/types'
+import { CHAMBERS, favoredParty, isCompetitive, isFlip, leader, ratingCounts, reportingText, resultTally, type ChamberInfo } from './lib/tally'
 import { useResults } from './lib/useResults'
 
 const ELECTION_DAY = new Date('2026-11-03T00:00:00')
@@ -19,7 +19,7 @@ function daysUntilElection() {
 }
 
 export default function App() {
-  const { results, updated, loaded, error, saveRace } = useResults()
+  const { results, history, updated, loaded, error, saveRace } = useResults()
   const [tab, setTab] = useState<Chamber>('senate')
   const [mode, setMode] = useState<Mode>('forecast')
   const [modeTouched, setModeTouched] = useState(false)
@@ -101,7 +101,7 @@ export default function App() {
         />
       </section>
 
-      <KeyRaces info={info} mode={mode} results={results} onSelect={setEditing} />
+      <KeyRaces info={info} mode={mode} results={results} history={history} onSelect={setEditing} />
       <RaceTable
         key={tab}
         info={info}
@@ -117,6 +117,7 @@ export default function App() {
           key={editing.id}
           race={editing}
           result={results[editing.id]}
+          history={history[editing.id]}
           onSave={(r) => saveRace(editing.id, r)}
           onClose={() => setEditing(null)}
         />
@@ -188,7 +189,7 @@ function Stat({ label, value, sub, party }: { label: string; value: number; sub:
   )
 }
 
-function KeyRaces({ info, mode, results, onSelect }: ViewProps & { onSelect: (r: Race) => void }) {
+function KeyRaces({ info, mode, results, history, onSelect }: ViewProps & { history: Record<string, Snapshot[]>; onSelect: (r: Race) => void }) {
   // Senate/governors: everything Lean or closer. House: toss ups only, or there'd be 50+ cards.
   const keyRatings: Rating[] = info.chamber === 'house' ? ['TU'] : ['TD', 'TU', 'TR']
   const races = info.races.filter((r) => keyRatings.includes(r.rating))
@@ -202,7 +203,13 @@ function KeyRaces({ info, mode, results, onSelect }: ViewProps & { onSelect: (r:
       </h2>
       <div className="card-grid">
         {sorted.map((race) => (
-          <RaceCard key={race.id} race={race} result={mode === 'results' ? results[race.id] : undefined} onSelect={onSelect} />
+          <RaceCard
+            key={race.id}
+            race={race}
+            result={mode === 'results' ? results[race.id] : undefined}
+            history={mode === 'results' ? history[race.id] : undefined}
+            onSelect={onSelect}
+          />
         ))}
       </div>
     </section>
@@ -330,7 +337,7 @@ function RaceTable({ info, mode, results, onSelect, stateFilter, onClearState }:
                       ) : lead ? (
                         <span>
                           {lead.party} +{lead.margin.toFixed(1)}
-                          {res?.reporting != null && <span className="muted"> · {res.reporting}%</span>}
+                          {res?.reporting != null && <span className="muted"> · {reportingText(res)}</span>}
                         </span>
                       ) : (
                         <span className="muted">{favoredParty(race.rating) ? '—' : 'Watch'}</span>

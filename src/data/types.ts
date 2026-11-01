@@ -35,9 +35,22 @@ export interface Race {
 export interface Result {
   winner?: Party
   called?: boolean
-  reporting?: number // % of expected vote counted
+  reporting?: number // % counted; see reportingKind
+  reportingKind?: 'precincts' | 'expected' // state feeds report precincts; manual entry is expected vote
   pct?: Partial<Record<Party, number>> // vote share
+  votes?: Partial<Record<Party, number>>
+  totalVotes?: number
+  source?: string // state feed the numbers came from; absent for manual entry
+  fetchedAt?: string
   note?: string
+}
+
+// One point in a race's count over the night, appended by the fetcher.
+export interface Snapshot {
+  t: string
+  pct?: Partial<Record<Party, number>>
+  reporting?: number
+  total: number
 }
 
 export interface ResultsFile {

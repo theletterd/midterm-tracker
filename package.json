@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fetch": "node --disable-warning=ExperimentalWarning server/run.ts"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",
