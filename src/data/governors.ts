@@ -1,4 +1,4 @@
-import type { Candidate, Party, Race, Rating } from './types'
+import type { Candidate, Party, Race, Rating } from './types.ts'
 
 // Source: Cook Political Report governor ratings, Oct 29, 2026
 // https://www.cookpolitical.com/ratings/governor-race-ratings

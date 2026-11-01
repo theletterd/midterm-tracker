@@ -1,4 +1,4 @@
-import type { Candidate, Party, Race, Rating } from './types'
+import type { Candidate, Party, Race, Rating } from './types.ts'
 
 // Source: Cook Political Report Senate ratings, Oct 30, 2026
 // https://www.cookpolitical.com/ratings/senate-race-ratings

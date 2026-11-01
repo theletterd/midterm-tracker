@@ -1,4 +1,4 @@
-import type { Party, Race, Rating } from "./types"
+import type { Party, Race, Rating } from './types.ts'
 
 // Source: Cook Political Report House ratings, Oct 30, 2026 (all 435 seats).
 // https://www.cookpolitical.com/ratings/house-race-ratings

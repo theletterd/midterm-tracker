@@ -16,7 +16,7 @@ npm run dev   # http://localhost:5173
 - **Map**: Senate and governor tabs color each state by rating (or result). The House tab shows one
   hexagon per district, grouped by state (real district outlines aren't used because several states
   redrew their maps mid-decade). Click a district to open it, or a state label to list its seats.
-- **Calls are manual**: click a race and pick the winner when a network or AP calls it.
+- **Calls** come from Decision Desk HQ's Bluesky automatically (see below), or click a race to call it yourself.
 
 ## Live results
 
@@ -39,10 +39,28 @@ so the page updates without a refresh. Calls and notes you enter are never overw
 Everything else is manual. MI, WI, NH and ME have no live statewide feed (counties or towns
 report separately), and AK, KS, NV, NE, AZ, OR, MS, OK and VT aren't wired up.
 
+## Race calls
+
+The dev server also checks [Decision Desk HQ's Bluesky](https://bsky.app/profile/decisiondeskhq.bsky.social)
+every minute. Its calls follow one template ("Decision Desk HQ projects X wins the GA US Senate …"),
+which `server/ddhq.ts` parses into a race and a winner. The account is followed by its permanent ID,
+so lookalike accounts are ignored, and only posts from election day on count.
+
+The winner's party comes from, in order: our candidate list (Senate and governor), nominee names in
+the state results feeds, DDHQ's own primary calls this year, or the incumbent's name. Then:
+
+- **Confident match:** the race is called on the board with a "DDHQ, 10:42 PM EST" note.
+- **Winner isn't the incumbent and the party is unknown:** most likely a flip. It's suggested, not
+  applied, and waits in **Needs your OK** at the top of the Results view.
+- **Unknown party in an open seat, or disagreement with an existing call:** also waits for you.
+
+DDHQ calls aren't AP calls; they sometimes come earlier or later. Change any call by clicking the race.
+
 ```bash
-npm run fetch                 # pull once and write results
+npm run fetch                 # pull results and calls once and write them
+npm run fetch -- --test-calls # parse DDHQ's posts since Sept 1 and show how they'd resolve
 npm run fetch -- --test-2024  # parse the 2024 general feeds and print, without writing
-FETCH=0 npm run dev           # dev server without the background fetcher
+FETCH=0 npm run dev           # dev server without the background fetcher and call checks
 ```
 
 ## Data
@@ -55,5 +73,7 @@ FETCH=0 npm run dev           # dev server without the background fetcher
 | `src/data/polls.ts` | Poll averages (or latest poll) for key races | RealClearPolling (Nov 1) |
 | `public/results.json` | Election-night returns and calls | State feeds + you |
 | `public/history.json` | Snapshots of each race over the night | State feeds |
+| `public/calls.json` | DDHQ calls read from Bluesky, and their status | DDHQ + you |
+| `public/nominees.json` | Candidate names per race, for matching calls | State feeds |
 
 Senate control: Democrats need 51 (VP Vance breaks ties), Republicans need 50.

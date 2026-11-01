@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { CallFeed } from './components/CallFeed'
 import { ChamberBar, type Mode } from './components/ChamberBar'
 import { RaceCard, pollSummary } from './components/RaceCard'
 import { POLLS_AS_OF } from './data/polls'
@@ -22,7 +23,7 @@ function daysUntilElection(resultsUpdated: string | null) {
 }
 
 export default function App() {
-  const { results, history, updated, loaded, error, saveCall } = useResults()
+  const { results, history, calls, updated, loaded, error, saveCall, resolveCall } = useResults()
   const [tab, setTab] = useState<Chamber>('senate')
   const [mode, setMode] = useState<Mode>('forecast')
   const [modeTouched, setModeTouched] = useState(false)
@@ -88,6 +89,8 @@ export default function App() {
           {info.need && <> The line marks {info.need.D} seats for a Democratic majority{info.chamber === 'senate' && ' (VP Vance breaks 50–50 ties for the GOP)'}.</>}
         </p>
       </section>
+
+      {mode === 'results' && <CallFeed calls={calls} onResolve={resolveCall} onOpenRace={setEditing} />}
 
       <section>
         <h2 className="section-title">Map</h2>

@@ -1,4 +1,4 @@
-import type { Party } from './types'
+import type { Party } from './types.ts'
 
 // Source: RealClearPolling race pages, pulled Nov 1, 2026.
 // "avg" is the RCP Average; where RCP has no average, "poll" is the most recent single poll.

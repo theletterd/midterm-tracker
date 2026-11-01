@@ -1,0 +1,692 @@
+{
+  "senate-IA": [
+    {
+      "name": "Ashley Hinson",
+      "party": "REP"
+    },
+    {
+      "name": "Josh Turek",
+      "party": "DEM"
+    },
+    {
+      "name": "Thomas Laehn",
+      "party": "LIB"
+    },
+    {
+      "name": "Write-in",
+      "party": ""
+    }
+  ],
+  "house-IA-01": [
+    {
+      "name": "Mariannette Miller-Meeks",
+      "party": "REP"
+    },
+    {
+      "name": "Christina Bohannan",
+      "party": "DEM"
+    },
+    {
+      "name": "Michael Bridgford",
+      "party": ""
+    },
+    {
+      "name": "Write-in",
+      "party": ""
+    }
+  ],
+  "house-IA-02": [
+    {
+      "name": "Joe Mitchell",
+      "party": "REP"
+    },
+    {
+      "name": "Lindsay James",
+      "party": "DEM"
+    },
+    {
+      "name": "Rick Stewart",
+      "party": "LIB"
+    },
+    {
+      "name": "Dave Bushaw",
+      "party": ""
+    },
+    {
+      "name": "Write-in",
+      "party": ""
+    }
+  ],
+  "house-IA-03": [
+    {
+      "name": "Zach Nunn",
+      "party": "REP"
+    },
+    {
+      "name": "Sarah Trone Garriott",
+      "party": "DEM"
+    },
+    {
+      "name": "Write-in",
+      "party": ""
+    }
+  ],
+  "house-IA-04": [
+    {
+      "name": "Chris McGowan",
+      "party": "REP"
+    },
+    {
+      "name": "Dave Dawson",
+      "party": "DEM"
+    },
+    {
+      "name": "Write-in",
+      "party": ""
+    }
+  ],
+  "gov-IA": [
+    {
+      "name": "Zach Lahn and Derek Wulf",
+      "party": "REP"
+    },
+    {
+      "name": "Rob Sand and Dave Muhlbauer",
+      "party": "DEM"
+    },
+    {
+      "name": "Write-in",
+      "party": ""
+    }
+  ],
+  "senate-MN": [
+    {
+      "name": "Marisa Simonetti",
+      "party": "IND"
+    },
+    {
+      "name": "Rebecca Whiting",
+      "party": "LIB"
+    },
+    {
+      "name": "Peggy Flanagan",
+      "party": "DFL"
+    },
+    {
+      "name": "Michele Tafoya",
+      "party": "R"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-01": [
+    {
+      "name": "Jake Johnson",
+      "party": "DFL"
+    },
+    {
+      "name": "Brad Finstad",
+      "party": "R"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-02": [
+    {
+      "name": "Matt Little",
+      "party": "DFL"
+    },
+    {
+      "name": "Eric Pratt",
+      "party": "R"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-03": [
+    {
+      "name": "Tyler Bass",
+      "party": "R"
+    },
+    {
+      "name": "Kelly Morrison",
+      "party": "DFL"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-04": [
+    {
+      "name": "Betty McCollum",
+      "party": "DFL"
+    },
+    {
+      "name": "Paul Wikstrom",
+      "party": "R"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-05": [
+    {
+      "name": "Ilhan Omar",
+      "party": "DFL"
+    },
+    {
+      "name": "John Nagel",
+      "party": "R"
+    },
+    {
+      "name": "DeVelle L. Jackson",
+      "party": "IND"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-06": [
+    {
+      "name": "Tom Emmer",
+      "party": "R"
+    },
+    {
+      "name": "Doug Chapin",
+      "party": "DFL"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-07": [
+    {
+      "name": "Michelle Fischbach",
+      "party": "R"
+    },
+    {
+      "name": "Erik Osberg",
+      "party": "DFL"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "house-MN-08": [
+    {
+      "name": "Pete Stauber",
+      "party": "R"
+    },
+    {
+      "name": "Trina Swanson",
+      "party": "DFL"
+    },
+    {
+      "name": "WRITE-IN",
+      "party": "WI"
+    }
+  ],
+  "senate-NC": [
+    {
+      "name": "Michael Dublin",
+      "party": "GRE"
+    },
+    {
+      "name": "Roy Cooper",
+      "party": "DEM"
+    },
+    {
+      "name": "Shannon W. Bray",
+      "party": "LIB"
+    },
+    {
+      "name": "Michael Whatley",
+      "party": "REP"
+    }
+  ],
+  "house-NC-01": [
+    {
+      "name": "Don Davis",
+      "party": "DEM"
+    },
+    {
+      "name": "Laurie Buckhout",
+      "party": "REP"
+    },
+    {
+      "name": "Tom Bailey",
+      "party": "LIB"
+    }
+  ],
+  "house-NC-02": [
+    {
+      "name": "Eugene F. Douglass",
+      "party": "REP"
+    },
+    {
+      "name": "Deborah K. Ross",
+      "party": "DEM"
+    },
+    {
+      "name": "Matthew Laszacs",
+      "party": "LIB"
+    },
+    {
+      "name": "Write-In (Miscellaneous)",
+      "party": ""
+    }
+  ],
+  "house-NC-03": [
+    {
+      "name": "Daniel Cavender",
+      "party": "LIB"
+    },
+    {
+      "name": "Raymond Smith",
+      "party": "DEM"
+    },
+    {
+      "name": "Greg Murphy",
+      "party": "REP"
+    }
+  ],
+  "house-NC-04": [
+    {
+      "name": "Valerie P. Foushee",
+      "party": "DEM"
+    },
+    {
+      "name": "Guy Meilleur",
+      "party": "LIB"
+    },
+    {
+      "name": "Mahesh (Max) Ganorkar",
+      "party": "REP"
+    }
+  ],
+  "house-NC-05": [
+    {
+      "name": "Virginia Foxx",
+      "party": "REP"
+    },
+    {
+      "name": "Robert B. Luffman",
+      "party": "LIB"
+    },
+    {
+      "name": "Chuck Hubbard",
+      "party": "DEM"
+    }
+  ],
+  "house-NC-06": [
+    {
+      "name": "Addison McDowell",
+      "party": "REP"
+    },
+    {
+      "name": "Cyril Jefferson",
+      "party": "DEM"
+    }
+  ],
+  "house-NC-07": [
+    {
+      "name": "Maad Abu-Ghazalah",
+      "party": "LIB"
+    },
+    {
+      "name": "David Rouzer",
+      "party": "REP"
+    },
+    {
+      "name": "Kimberly Hardy",
+      "party": "DEM"
+    }
+  ],
+  "house-NC-08": [
+    {
+      "name": "Bo Whitehead",
+      "party": "GRE"
+    },
+    {
+      "name": "Colby Watson",
+      "party": "DEM"
+    },
+    {
+      "name": "Mark Harris",
+      "party": "REP"
+    }
+  ],
+  "house-NC-09": [
+    {
+      "name": "Richard N. Ojeda II",
+      "party": "DEM"
+    },
+    {
+      "name": "Richard Hudson",
+      "party": "REP"
+    }
+  ],
+  "house-NC-10": [
+    {
+      "name": "Steven Feldman",
+      "party": "LIB"
+    },
+    {
+      "name": "Ashley Bell",
+      "party": "DEM"
+    },
+    {
+      "name": "Pat Harrigan",
+      "party": "REP"
+    }
+  ],
+  "house-NC-11": [
+    {
+      "name": "Jennifer Capps Balkcom",
+      "party": "REP"
+    },
+    {
+      "name": "Jamie Ager",
+      "party": "DEM"
+    },
+    {
+      "name": "Travis Groo",
+      "party": "LIB"
+    }
+  ],
+  "house-NC-12": [
+    {
+      "name": "Jack Codiga",
+      "party": "REP"
+    },
+    {
+      "name": "Alma S. Adams",
+      "party": "DEM"
+    }
+  ],
+  "house-NC-13": [
+    {
+      "name": "Paul Barringer",
+      "party": "DEM"
+    },
+    {
+      "name": "Steven Swinton",
+      "party": "LIB"
+    },
+    {
+      "name": "Brad Knott",
+      "party": "REP"
+    }
+  ],
+  "house-NC-14": [
+    {
+      "name": "Lakesha Womack",
+      "party": "DEM"
+    },
+    {
+      "name": "Tim Moore",
+      "party": "REP"
+    }
+  ],
+  "senate-OH": [
+    {
+      "name": "Sherrod Brown",
+      "party": "D"
+    },
+    {
+      "name": "Stephen Faris",
+      "party": "WI"
+    },
+    {
+      "name": "Anthony Holliman",
+      "party": "WI"
+    },
+    {
+      "name": "Jon Husted",
+      "party": "R"
+    },
+    {
+      "name": "Greg Levy",
+      "party": "OP"
+    },
+    {
+      "name": "William B. Redpath",
+      "party": "L"
+    },
+    {
+      "name": "Timothy Telymonde",
+      "party": "WI"
+    }
+  ],
+  "gov-OH": [
+    {
+      "name": "Amy Acton",
+      "party": "D"
+    },
+    {
+      "name": "Timothy Grady",
+      "party": "WI"
+    },
+    {
+      "name": "Heather Hill",
+      "party": "WI"
+    },
+    {
+      "name": "Don Kissick",
+      "party": "L"
+    },
+    {
+      "name": "Vivek Ramaswamy",
+      "party": "R"
+    },
+    {
+      "name": "Renea Turner",
+      "party": "WI"
+    }
+  ],
+  "house-OH-01": [
+    {
+      "name": "Eric Conroy",
+      "party": "R"
+    },
+    {
+      "name": "Greg Landsman",
+      "party": "D"
+    },
+    {
+      "name": "Nathan Weise",
+      "party": "L"
+    }
+  ],
+  "house-OH-02": [
+    {
+      "name": "Jen Mazzuckelli",
+      "party": "D"
+    },
+    {
+      "name": "David J. Taylor",
+      "party": "R"
+    }
+  ],
+  "house-OH-03": [
+    {
+      "name": "Joyce Beatty",
+      "party": "D"
+    },
+    {
+      "name": "Cleophus Dulaney",
+      "party": "R"
+    }
+  ],
+  "house-OH-04": [
+    {
+      "name": "Jim Jordan",
+      "party": "R"
+    },
+    {
+      "name": "Joshua D. Kolasinski",
+      "party": "D"
+    },
+    {
+      "name": "Tracey  L. Tackett",
+      "party": "NO"
+    }
+  ],
+  "house-OH-05": [
+    {
+      "name": "Bob Latta",
+      "party": "R"
+    },
+    {
+      "name": "Brian A. Shaver",
+      "party": "D"
+    },
+    {
+      "name": "Michael J. Veloff",
+      "party": "L"
+    }
+  ],
+  "house-OH-06": [
+    {
+      "name": "Elizabeth Kirtley",
+      "party": "D"
+    },
+    {
+      "name": "Michael A. Rulli",
+      "party": "R"
+    }
+  ],
+  "house-OH-07": [
+    {
+      "name": "Thahbia Asad",
+      "party": "WI"
+    },
+    {
+      "name": "Andrey Joseph Martinichin",
+      "party": "WI"
+    },
+    {
+      "name": "Max Miller",
+      "party": "R"
+    },
+    {
+      "name": "Brian Poindexter",
+      "party": "D"
+    }
+  ],
+  "house-OH-08": [
+    {
+      "name": "Warren Davidson",
+      "party": "R"
+    },
+    {
+      "name": "Vanessa Enoch",
+      "party": "D"
+    }
+  ],
+  "house-OH-09": [
+    {
+      "name": "Marcy Kaptur",
+      "party": "D"
+    },
+    {
+      "name": "Kathy McKinstry",
+      "party": "WI"
+    },
+    {
+      "name": "Derek Merrin",
+      "party": "R"
+    }
+  ],
+  "house-OH-10": [
+    {
+      "name": "Kristina Knickerbocker",
+      "party": "D"
+    },
+    {
+      "name": "Thomas F. McMasters",
+      "party": "L"
+    },
+    {
+      "name": "Mike Turner",
+      "party": "R"
+    }
+  ],
+  "house-OH-11": [
+    {
+      "name": "Shontel M. Brown",
+      "party": "D"
+    },
+    {
+      "name": "Mike Kirchner",
+      "party": "R"
+    }
+  ],
+  "house-OH-12": [
+    {
+      "name": "Troy Balderson",
+      "party": "R"
+    },
+    {
+      "name": "Jerrad Christian",
+      "party": "D"
+    }
+  ],
+  "house-OH-13": [
+    {
+      "name": "Carey Coleman",
+      "party": "R"
+    },
+    {
+      "name": "Sandeep Dixit",
+      "party": "NP"
+    },
+    {
+      "name": "Emilia Sykes",
+      "party": "D"
+    }
+  ],
+  "house-OH-14": [
+    {
+      "name": "David P. Joyce",
+      "party": "R"
+    },
+    {
+      "name": "Maria Jukic",
+      "party": "D"
+    }
+  ],
+  "house-OH-15": [
+    {
+      "name": "Brennan Barrington",
+      "party": "L"
+    },
+    {
+      "name": "Mike Carey",
+      "party": "R"
+    },
+    {
+      "name": "Gary Josephson",
+      "party": "WI"
+    },
+    {
+      "name": "Don Leonard",
+      "party": "D"
+    },
+    {
+      "name": "Samuel Ronan",
+      "party": "WI"
+    }
+  ]
+}

@@ -60,6 +60,20 @@ export interface Snapshot {
   total: number
 }
 
+// A race call read from Decision Desk HQ's Bluesky posts (see server/ddhq.ts).
+export interface CallEntry {
+  uri: string
+  postedAt: string
+  text: string
+  raceId: string | null
+  winnerName: string
+  party: Party | null
+  suggested?: 'D' | 'R'
+  calledAt: string
+  status: 'applied' | 'review' | 'conflict' | 'dismissed' | 'resolved'
+  reason?: string
+}
+
 export interface ResultsFile {
   updated: string | null
   races: Record<string, Result>

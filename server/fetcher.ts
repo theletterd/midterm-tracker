@@ -14,6 +14,7 @@ export interface Matched {
   id: string
   source: string
   tally: Tally
+  candidates: { name: string; party: string }[]
 }
 
 // Fetch every source in parallel; one failing state doesn't stop the others.
@@ -31,7 +32,7 @@ export async function collect(sources: Source[]): Promise<{ matched: Matched[]; 
           const t = tally(c)
           races++
           if (t.total > 0) withVotes++
-          matched.push({ id, source: src.label, tally: t })
+          matched.push({ id, source: src.label, tally: t, candidates: c.candidates.map(({ name, party }) => ({ name, party })) })
         }
         return { state: src.state, ok: true, races, withVotes }
       } catch (err) {
@@ -42,14 +43,19 @@ export async function collect(sources: Source[]): Promise<{ matched: Matched[]; 
   return { matched, reports }
 }
 
-// Merge fetched numbers into results.json without touching calls or notes, and append
-// a history snapshot whenever a race's vote total moves.
+// Merge fetched numbers into results.json without touching calls or notes, append
+// a history snapshot whenever a race's vote total moves, and remember each race's
+// nominees (published before any votes) for matching call posts.
 export async function fetchOnce(sources: Source[]): Promise<FeedReport[]> {
   const { matched, reports } = await collect(sources)
   const now = new Date().toISOString()
-  await update((results, history) => {
+  await update(({ results, history, nominees }) => {
     let changed = false
-    for (const { id, source, tally: t } of matched) {
+    for (const { id, source, tally: t, candidates } of matched) {
+      if (candidates.length && JSON.stringify(nominees[id]) !== JSON.stringify(candidates)) {
+        nominees[id] = candidates
+        changed = true
+      }
       // Before polls close feeds publish zeros; skip them so the board stays clean.
       if (t.total === 0) continue
       const prev = results.races[id] ?? {}
