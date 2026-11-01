@@ -16,6 +16,8 @@
   --ind: #7a5bb5;
   --uncalled: #c4c4bc;
   --map-empty: #ecece8;
+  --early: #2a8a7e;
+  --counted: #1c1c1a;
 
   font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: var(--text);
@@ -36,6 +38,8 @@
     --tossup: #c9ad52;
     --uncalled: #66665e;
     --map-empty: #2a2a27;
+    --early: #4fb3a5;
+    --counted: #ecece8;
   }
 }
 
@@ -304,8 +308,39 @@ legend { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-sp
 .turnout-states td a { color: inherit; }
 .key-tag { margin-left: 6px; font-size: 10.5px; font-weight: 600; padding: 1px 5px; border-radius: 4px; background: var(--tossup); color: #4a3b07; vertical-align: 1px; }
 .share-cell { display: inline-flex; align-items: center; gap: 8px; }
-.share-bar { display: inline-block; width: 70px; height: 8px; border-radius: 4px; background: var(--map-empty); overflow: hidden; }
-.share-bar span { display: block; height: 100%; background: var(--muted); }
 .party-cell { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
 .mini-bar { display: inline-flex; width: 80px; height: 8px; border-radius: 4px; overflow: hidden; background: var(--map-empty); }
 .mini-bar span { display: block; height: 100%; }
+
+/* Cast early (striped teal) vs counted (solid) */
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -2px; margin-right: 4px; }
+.swatch-early, .dual-early { background: repeating-linear-gradient(135deg, var(--early) 0 3px, color-mix(in srgb, var(--early) 45%, transparent) 3px 6px); }
+.swatch-counted, .dual-counted { background: var(--counted); }
+.dual-bar { position: relative; display: block; height: 14px; border-radius: 3px; background: var(--map-empty); overflow: hidden; min-width: 90px; }
+.dual-early { position: absolute; left: 0; top: 0; bottom: 0; }
+.dual-counted { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 2px 2px 0; }
+.turnout-card .dual-bar, .turnout-nation .dual-bar { height: 18px; margin: 10px 0 6px; }
+.turnout-card .dual-counted, .turnout-nation .dual-counted { top: 5px; bottom: 5px; }
+.turnout-legend { display: inline-flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; align-items: center; }
+.turnout-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.turnout-figure { display: flex; flex-direction: column; gap: 2px; padding-left: 10px; border-left: 3px solid var(--border); }
+.turnout-figure:first-child { border-left-color: var(--early); }
+.turnout-figure:last-child { border-left-color: var(--counted); }
+.figure-label { font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+.figure-value { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.figure-value.big { font-size: 40px; }
+.figure-sub { font-size: 12.5px; }
+.turnout-nation { margin-bottom: 18px; }
+.nation-compare { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; font-size: 12.5px; margin-top: 12px; }
+.nation-compare .dual-bar { margin: 0; }
+.turnout-explain { font-size: 12.5px; margin: 12px 0 0; line-height: 1.5; }
+.turnout-sub { font-size: 13px; margin: 16px 0 6px; font-weight: 600; }
+.turnout-compare { font-size: 12.5px; margin: 0 0 4px; }
+.share-cell { display: grid; grid-template-columns: 90px auto; gap: 8px; align-items: center; }
+.share-nums { white-space: nowrap; font-size: 12.5px; }
+.early-text { color: var(--early); font-weight: 600; }
+.turnout-states th.group-early { background: color-mix(in srgb, var(--early) 10%, transparent); }
+.turnout-states th.group-counted { background: color-mix(in srgb, var(--counted) 8%, transparent); }
+.turnout-states .group-row th { border-bottom: 0; }
+.turnout-states td.group-counted { background: color-mix(in srgb, var(--counted) 3%, transparent); }
+@media (max-width: 640px) { .turnout-pair { grid-template-columns: 1fr; } .nation-compare { grid-template-columns: 1fr; } }

@@ -106,7 +106,7 @@ export default function App() {
         </button>
       </nav>
 
-      {tab === 'turnout' && <Turnout />}
+      {tab === 'turnout' && <Turnout results={results} />}
 
       {/* Stays mounted on every tab so polling and new-post tracking keep running. */}
       <div hidden={tab !== 'bluesky'}>
