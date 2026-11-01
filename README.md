@@ -20,8 +20,9 @@ npm run dev   # http://localhost:5173
 
 ## Bluesky feeds
 
-Two columns below the key races, refreshed every 90 seconds straight from Bluesky's public API
-(no login, works without the dev server):
+Two columns on the **Bluesky** tab, refreshed every 90 seconds straight from Bluesky's public API
+(no login, works without the dev server). They keep refreshing while you're on other tabs, and the
+tab shows a count of new Curated posts since you last looked:
 
 - **Curated**: the latest posts from hand-picked election analysts, desks and outlets. Big outlets
   are filtered to election-related posts. Edit the list in `src/data/feeds.ts`.

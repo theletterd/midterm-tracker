@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { CallFeed } from './components/CallFeed'
 import { ChamberBar, type Mode } from './components/ChamberBar'
 import { RaceCard, pollSummary } from './components/RaceCard'
@@ -12,6 +12,7 @@ import { useResults } from './lib/useResults'
 
 const ELECTION_DAY = new Date('2026-11-03T00:00:00')
 const TABS: Chamber[] = ['senate', 'house', 'gov']
+type Tab = Chamber | 'bluesky'
 
 const fmtDate = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString([], { month: 'short', day: 'numeric' })
 
@@ -25,7 +26,7 @@ function daysUntilElection(resultsUpdated: string | null) {
 
 export default function App() {
   const { results, history, calls, updated, loaded, error, saveCall, resolveCall } = useResults()
-  const [tab, setTab] = useState<Chamber>('senate')
+  const [tab, setTab] = useState<Tab>('senate')
   const [mode, setMode] = useState<Mode>('forecast')
   const [modeTouched, setModeTouched] = useState(false)
   const [editing, setEditing] = useState<Race | null>(null)
@@ -36,7 +37,15 @@ export default function App() {
     if (loaded && !modeTouched && Object.keys(results).length > 0) setMode('results')
   }, [loaded, modeTouched, results])
 
-  const info = CHAMBERS[tab]
+  // Count Curated posts that arrive while the Bluesky tab isn't open, for a badge on the tab.
+  const [unseenPosts, setUnseenPosts] = useState(0)
+  const tabRef = useRef(tab)
+  tabRef.current = tab
+  const onNewPosts = useCallback((n: number) => {
+    if (tabRef.current !== 'bluesky') setUnseenPosts((u) => u + n)
+  }, [])
+
+  const info = tab === 'bluesky' ? null : CHAMBERS[tab]
   const days = daysUntilElection(updated)
 
   return (
@@ -49,7 +58,7 @@ export default function App() {
             {updated && <> · Results updated {new Date(updated).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</>}
           </p>
         </div>
-        <div className="seg-control" role="tablist" aria-label="View mode">
+        <div className={`seg-control ${info ? '' : 'hidden'}`} role="tablist" aria-label="View mode">
           {(['forecast', 'results'] as Mode[]).map((m) => (
             <button
               key={m}
@@ -69,7 +78,7 @@ export default function App() {
 
       {error && <div className="banner">{error}</div>}
 
-      <nav className="tabs" role="tablist" aria-label="Chamber">
+      <nav className="tabs" role="tablist" aria-label="View">
         {TABS.map((c) => (
           <button key={c} role="tab" aria-selected={tab === c} className={tab === c ? 'active' : ''} onClick={() => {
             setTab(c)
@@ -79,8 +88,27 @@ export default function App() {
             <small>{CHAMBERS[c].races.length}</small>
           </button>
         ))}
+        <button
+          role="tab"
+          aria-selected={tab === 'bluesky'}
+          className={`tab-bluesky ${tab === 'bluesky' ? 'active' : ''}`}
+          onClick={() => {
+            setTab('bluesky')
+            setUnseenPosts(0)
+          }}
+        >
+          Bluesky
+          {unseenPosts > 0 && <span className="badge" aria-label={`${unseenPosts} new posts`}>{unseenPosts > 99 ? '99+' : unseenPosts}</span>}
+        </button>
       </nav>
 
+      {/* Stays mounted on every tab so polling and new-post tracking keep running. */}
+      <div hidden={tab !== 'bluesky'}>
+        <SocialFeeds onNewPosts={onNewPosts} />
+      </div>
+
+      {info && (
+        <>
       <section className="panel">
         <Summary info={info} mode={mode} results={results} />
         <ChamberBar info={info} mode={mode} results={results} />
@@ -109,7 +137,6 @@ export default function App() {
       </section>
 
       <KeyRaces info={info} mode={mode} results={results} history={history} onSelect={setEditing} />
-      <SocialFeeds />
       <RaceTable
         key={tab}
         info={info}
@@ -119,6 +146,8 @@ export default function App() {
         stateFilter={stateFilter}
         onClearState={() => setStateFilter(null)}
       />
+        </>
+      )}
 
       {editing && (
         <RaceEditor

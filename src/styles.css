@@ -253,7 +253,7 @@ legend { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-sp
 .feed-head .muted { font-size: 12px; }
 .feed-updated { white-space: nowrap; }
 .feed-warning { margin: 0; padding: 8px 14px; font-size: 12.5px; background: var(--bg); color: var(--muted); border-bottom: 1px solid var(--border); }
-.feed-list { list-style: none; margin: 0; padding: 0; max-height: 560px; overflow-y: auto; }
+.feed-list { list-style: none; margin: 0; padding: 0; height: calc(100vh - 260px); min-height: 360px; overflow-y: auto; }
 .feed-list li + li { border-top: 1px solid var(--border); }
 .feed-list li.fresh { box-shadow: inset 3px 0 0 var(--tossup); }
 .feed-post { display: flex; gap: 10px; padding: 10px 14px; color: inherit; text-decoration: none; }
@@ -263,3 +263,8 @@ legend { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-sp
 .feed-meta { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .feed-text { margin: 2px 0 0; font-size: 14px; line-height: 1.4; white-space: pre-wrap; overflow-wrap: anywhere; }
 .feed-empty { padding: 14px; font-size: 13px; }
+
+.seg-control.hidden { visibility: hidden; }
+.tab-bluesky { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+.badge { background: var(--tossup); color: #4a3b07; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 7px; line-height: 1.5; }
+.feeds-intro { font-size: 13px; margin: 0 0 10px; }
