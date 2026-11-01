@@ -14,7 +14,7 @@
   --r-likely: #d9665d;
   --r-solid: #a8261d;
   --ind: #7a5bb5;
-  --uncalled: #d8d8d3;
+  --uncalled: #c4c4bc;
   --map-empty: #ecece8;
 
   font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -34,7 +34,7 @@
     --d-lean: #6f8fc4;
     --r-lean: #c97d77;
     --tossup: #c9ad52;
-    --uncalled: #45453f;
+    --uncalled: #66665e;
     --map-empty: #2a2a27;
   }
 }
@@ -227,3 +227,7 @@ legend { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-sp
 .map .hex-label { font-size: 12px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: central; cursor: pointer; paint-order: stroke; stroke: rgb(0 0 0 / 0.45); stroke-width: 2.5px; }
 .map .hex-label.small { font-size: 10px; }
 .map .hex-label.selected { text-decoration: underline; }
+
+.returns-num { font-variant-numeric: tabular-nums; font-weight: 600; }
+.returns-num small { font-weight: 400; margin-left: 4px; }
+.returns-meta { font-size: 12.5px; margin: 0; }

@@ -35,14 +35,21 @@ export interface Race {
 export interface Result {
   winner?: Party
   called?: boolean
-  reporting?: number // % counted; see reportingKind
-  reportingKind?: 'precincts' | 'expected' // state feeds report precincts; manual entry is expected vote
+  reporting?: number // % of precincts reporting, per the state feed
+  reportingKind?: 'precincts'
   pct?: Partial<Record<Party, number>> // vote share
   votes?: Partial<Record<Party, number>>
   totalVotes?: number
-  source?: string // state feed the numbers came from; absent for manual entry
+  source?: string // state feed the numbers came from
   fetchedAt?: string
   note?: string
+}
+
+// The hand-entered part of a result. null clears a field.
+export interface CallUpdate {
+  winner: Party | null
+  called: boolean
+  note: string | null
 }
 
 // One point in a race's count over the night, appended by the fetcher.

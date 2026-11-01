@@ -78,8 +78,7 @@ export function resultTally(races: Race[], results: Record<string, Result>): Res
 }
 
 export function reportingText(res?: Result): string | null {
-  if (res?.reporting == null) return null
-  return res.reportingKind === 'precincts' ? `${res.reporting}% of precincts` : `${res.reporting}% in`
+  return res?.reporting == null ? null : `${res.reporting}% of precincts`
 }
 
 export function isFlip(race: Race, res?: Result) {

@@ -3,11 +3,12 @@ import react from '@vitejs/plugin-react'
 import { FEEDS_2026 } from './server/feeds.ts'
 import { fetchOnce, formatReports } from './server/fetcher.ts'
 import { update } from './server/store.ts'
+import { applyCall } from './src/lib/calls.ts'
 
 const FETCH_EVERY_MS = 2 * 60_000
 
 // Dev-server backend:
-// - POST /api/results {id, result} saves one race's manual edits (null clears it).
+// - POST /api/results {id, update} saves one race's call and note.
 // - Every 2 minutes, pulls official state results into public/results.json and
 //   public/history.json. Set FETCH=0 to turn that off.
 function resultsBackend(): Plugin {
@@ -24,11 +25,10 @@ function resultsBackend(): Plugin {
         req.on('data', (chunk) => (body += chunk))
         req.on('end', async () => {
           try {
-            const { id, result } = JSON.parse(body)
-            if (typeof id !== 'string') throw new Error('missing id')
+            const { id, update: call } = JSON.parse(body)
+            if (typeof id !== 'string' || typeof call?.called !== 'boolean') throw new Error('expected {id, update}')
             await update((results) => {
-              if (result) results.races[id] = { ...results.races[id], ...result }
-              else delete results.races[id]
+              results.races[id] = applyCall(results.races[id], call)
             })
             res.statusCode = 204
             res.end()

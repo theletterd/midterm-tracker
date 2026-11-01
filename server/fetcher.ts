@@ -48,10 +48,13 @@ export async function fetchOnce(sources: Source[]): Promise<FeedReport[]> {
   const { matched, reports } = await collect(sources)
   const now = new Date().toISOString()
   await update((results, history) => {
+    let changed = false
     for (const { id, source, tally: t } of matched) {
       // Before polls close feeds publish zeros; skip them so the board stays clean.
       if (t.total === 0) continue
       const prev = results.races[id] ?? {}
+      if (prev.totalVotes === t.total && prev.reporting === t.reporting) continue
+      changed = true
       results.races[id] = {
         ...prev,
         pct: t.pct,
@@ -65,6 +68,7 @@ export async function fetchOnce(sources: Source[]): Promise<FeedReport[]> {
       const snaps = (history[id] ??= [])
       if (snaps.at(-1)?.total !== t.total) snaps.push({ t: now, pct: t.pct, reporting: t.reporting, total: t.total })
     }
+    return changed
   })
   return reports
 }

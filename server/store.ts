@@ -9,7 +9,7 @@ export interface StoredResult {
   winner?: 'D' | 'R' | 'I'
   called?: boolean
   reporting?: number
-  reportingKind?: 'precincts' | 'expected'
+  reportingKind?: 'precincts'
   pct?: Partial<Record<'D' | 'R' | 'I', number>>
   votes?: Partial<Record<'D' | 'R' | 'I', number>>
   totalVotes?: number
@@ -48,13 +48,14 @@ async function writeJson(file: string, data: unknown) {
 }
 
 // The fetcher and the UI's save endpoint both write results.json; run updates one at a time.
+// `fn` returns false to skip the write (nothing changed), so `updated` reflects real changes.
 let queue: Promise<unknown> = Promise.resolve()
 
-export function update(fn: (results: ResultsFile, history: HistoryFile) => void | Promise<void>): Promise<void> {
+export function update(fn: (results: ResultsFile, history: HistoryFile) => void | boolean | Promise<void | boolean>): Promise<void> {
   const run = queue.then(async () => {
     const results = await readJson<ResultsFile>(RESULTS_FILE, { updated: null, races: {} })
     const history = await readJson<HistoryFile>(HISTORY_FILE, {})
-    await fn(results, history)
+    if ((await fn(results, history)) === false) return
     results.updated = new Date().toISOString()
     await writeJson(RESULTS_FILE, results)
     await writeJson(HISTORY_FILE, history)

@@ -13,13 +13,16 @@ const TABS: Chamber[] = ['senate', 'house', 'gov']
 
 const fmtDate = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString([], { month: 'short', day: 'numeric' })
 
-function daysUntilElection() {
-  const ms = ELECTION_DAY.getTime() - new Date(new Date().toDateString()).getTime()
+// Results only exist from election night on, so a results timestamp later than the
+// clock (as in a replay or simulation) wins.
+function daysUntilElection(resultsUpdated: string | null) {
+  const now = new Date(Math.max(Date.now(), resultsUpdated ? Date.parse(resultsUpdated) : 0))
+  const ms = ELECTION_DAY.getTime() - new Date(now.toDateString()).getTime()
   return Math.round(ms / 86_400_000)
 }
 
 export default function App() {
-  const { results, history, updated, loaded, error, saveRace } = useResults()
+  const { results, history, updated, loaded, error, saveCall } = useResults()
   const [tab, setTab] = useState<Chamber>('senate')
   const [mode, setMode] = useState<Mode>('forecast')
   const [modeTouched, setModeTouched] = useState(false)
@@ -32,7 +35,7 @@ export default function App() {
   }, [loaded, modeTouched, results])
 
   const info = CHAMBERS[tab]
-  const days = daysUntilElection()
+  const days = daysUntilElection(updated)
 
   return (
     <div className="app">
@@ -118,7 +121,7 @@ export default function App() {
           race={editing}
           result={results[editing.id]}
           history={history[editing.id]}
-          onSave={(r) => saveRace(editing.id, r)}
+          onSave={(u) => saveCall(editing.id, u)}
           onClose={() => setEditing(null)}
         />
       )}
@@ -350,7 +353,7 @@ function RaceTable({ info, mode, results, onSelect, stateFilter, onClearState }:
           </tbody>
         </table>
       </div>
-      <p className="muted hint">Click any race to enter returns or call it.</p>
+      <p className="muted hint">Click any race to see its returns or call it.</p>
     </section>
   )
 }
