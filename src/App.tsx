@@ -4,6 +4,7 @@ import { ChamberBar, type Mode } from './components/ChamberBar'
 import { RaceCard, pollSummary } from './components/RaceCard'
 import { POLLS_AS_OF } from './data/polls'
 import { RaceEditor } from './components/RaceEditor'
+import { SocialFeeds } from './components/SocialFeeds'
 import { UsMap } from './components/UsMap'
 import { RATINGS, RATING_LABEL, type Chamber, type Race, type Rating, type Result, type Snapshot } from './data/types'
 import { CHAMBERS, favoredParty, isCompetitive, isFlip, leader, ratingCounts, reportingText, resultTally, type ChamberInfo } from './lib/tally'
@@ -108,6 +109,7 @@ export default function App() {
       </section>
 
       <KeyRaces info={info} mode={mode} results={results} history={history} onSelect={setEditing} />
+      <SocialFeeds />
       <RaceTable
         key={tab}
         info={info}

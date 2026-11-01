@@ -18,6 +18,19 @@ npm run dev   # http://localhost:5173
   redrew their maps mid-decade). Click a district to open it, or a state label to list its seats.
 - **Calls** come from Decision Desk HQ's Bluesky automatically (see below), or click a race to call it yourself.
 
+## Bluesky feeds
+
+Two columns below the key races, refreshed every 90 seconds straight from Bluesky's public API
+(no login, works without the dev server):
+
+- **Curated**: the latest posts from hand-picked election analysts, desks and outlets. Big outlets
+  are filtered to election-related posts. Edit the list in `src/data/feeds.ts`.
+- **Everything**: the latest English posts under `#Election2026 #Midterms2026 #Midterms
+  #ElectionNight`, minus anything Bluesky has labeled. Unfiltered otherwise, so treat it as noise.
+
+Posts are text only (no images or embeds); click one to open it on Bluesky. New posts since the last
+refresh get a yellow edge.
+
 ## Live results
 
 `npm run dev` also pulls official state results every 2 minutes and writes them to
