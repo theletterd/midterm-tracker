@@ -297,3 +297,15 @@ legend { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-sp
 .turnout-methods { font-size: 12.5px; margin: 0; }
 .turnout-history { margin-top: 10px; font-size: 13px; }
 .turnout-history summary { cursor: pointer; color: var(--muted); }
+.turnout-national { margin-top: 28px; }
+.turnout-check { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; }
+.turnout-states { font-variant-numeric: tabular-nums; }
+.turnout-states tbody tr { cursor: default; }
+.turnout-states td a { color: inherit; }
+.key-tag { margin-left: 6px; font-size: 10.5px; font-weight: 600; padding: 1px 5px; border-radius: 4px; background: var(--tossup); color: #4a3b07; vertical-align: 1px; }
+.share-cell { display: inline-flex; align-items: center; gap: 8px; }
+.share-bar { display: inline-block; width: 70px; height: 8px; border-radius: 4px; background: var(--map-empty); overflow: hidden; }
+.share-bar span { display: block; height: 100%; background: var(--muted); }
+.party-cell { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.mini-bar { display: inline-flex; width: 80px; height: 8px; border-radius: 4px; overflow: hidden; background: var(--map-empty); }
+.mini-bar span { display: block; height: 100%; }

@@ -100,7 +100,22 @@ export interface TurnoutState {
   history: { asOf: string; total: number; D: number; R: number }[] // one point per state update
 }
 
+// One row per state from the UF Election Lab's national early-vote file.
+export interface TurnoutRow {
+  state: string
+  name: string
+  updated: string // YYYY-MM-DD, the day the state's numbers were last updated
+  source: string
+  notes?: string
+  voted: number
+  inPerson: number
+  mail: number
+  turnout2022: number // every ballot cast in 2022
+  parties: { D: number; R: number; none: number } | null // only where the state registers by party
+}
+
 export interface TurnoutFile {
   checkedAt: string | null
   states: TurnoutState[]
+  national: { asOf: string; source: string; rows: TurnoutRow[] } | null
 }

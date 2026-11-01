@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
-import type { PartySplit, TurnoutFile, TurnoutState } from '../data/types'
+import { useEffect, useMemo, useState } from 'react'
+import { GOVERNORS } from '../data/governors'
+import { SENATE } from '../data/senate'
+import type { PartySplit, Rating, TurnoutFile, TurnoutRow, TurnoutState } from '../data/types'
 
 const REFRESH_MS = 5 * 60_000
 
@@ -119,6 +121,140 @@ function StateCard({ s }: { s: TurnoutState }) {
   )
 }
 
+// States with a Senate or governor's race rated Lean or closer, for a tag in the table.
+const CLOSE: Rating[] = ['LD', 'TD', 'TU', 'TR', 'LR']
+const KEY_RACES = new Map<string, string[]>()
+for (const [races, tag] of [[SENATE, 'Sen'], [GOVERNORS, 'Gov']] as const) {
+  for (const r of races) {
+    if (!CLOSE.includes(r.rating)) continue
+    const st = r.label.slice(0, 2)
+    KEY_RACES.set(st, [...(KEY_RACES.get(st) ?? []), tag])
+  }
+}
+
+type SortKey = 'share' | 'voted' | 'name' | 'gap'
+const SORTS: { key: SortKey; label: string }[] = [
+  { key: 'share', label: '% of 2022 turnout' },
+  { key: 'voted', label: 'Ballots cast' },
+  { key: 'gap', label: 'Party gap' },
+  { key: 'name', label: 'State' },
+]
+
+const dateLabel = (ymd: string) => new Date(`${ymd}T12:00:00`).toLocaleDateString([], { month: 'short', day: 'numeric' })
+
+function NationalTable({ national }: { national: NonNullable<TurnoutFile['national']> }) {
+  const [sort, setSort] = useState<SortKey>('share')
+  const [keyOnly, setKeyOnly] = useState(false)
+
+  const rows = useMemo(() => {
+    const share = (r: TurnoutRow) => pct(r.voted, r.turnout2022)
+    const gapOf = (r: TurnoutRow) => (r.parties ? pct(r.parties.D - r.parties.R, r.voted) : -Infinity)
+    const by: Record<SortKey, (a: TurnoutRow, b: TurnoutRow) => number> = {
+      share: (a, b) => share(b) - share(a),
+      voted: (a, b) => b.voted - a.voted,
+      gap: (a, b) => gapOf(b) - gapOf(a),
+      name: (a, b) => a.name.localeCompare(b.name),
+    }
+    return national.rows.filter((r) => !keyOnly || KEY_RACES.has(r.state)).sort(by[sort])
+  }, [national, sort, keyOnly])
+
+  const total = national.rows.reduce((n, r) => n + r.voted, 0)
+
+  return (
+    <section className="turnout-national">
+      <h2 className="section-title">
+        Every state <span className="muted">{fmt(total)} ballots cast early or by mail so far</span>
+      </h2>
+      <div className="filters">
+        <select value={sort} onChange={(e) => setSort(e.target.value as SortKey)} aria-label="Sort states">
+          {SORTS.map((s) => (
+            <option key={s.key} value={s.key}>
+              Sort: {s.label}
+            </option>
+          ))}
+        </select>
+        <label className="turnout-check">
+          <input type="checkbox" checked={keyOnly} onChange={(e) => setKeyOnly(e.target.checked)} /> Only states with a close Senate or
+          governor's race
+        </label>
+      </div>
+      <div className="table-wrap">
+        <table className="turnout-states">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Ballots cast</th>
+              <th>% of 2022 turnout</th>
+              <th>In person</th>
+              <th>Mail</th>
+              <th>Party split (D / R / other)</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => {
+              const share = pct(r.voted, r.turnout2022)
+              const p = r.parties
+              const g = p && gap({ D: p.D, R: p.R, unaffiliated: p.none, other: 0 }, r.voted)
+              return (
+                <tr key={r.state} title={r.notes}>
+                  <td>
+                    <b>{r.name}</b>
+                    {KEY_RACES.get(r.state)?.map((t) => (
+                      <span key={t} className="key-tag">
+                        {t}
+                      </span>
+                    ))}
+                  </td>
+                  <td>{fmt(r.voted)}</td>
+                  <td>
+                    <span className="share-cell">
+                      <span className="share-bar">
+                        <span style={{ width: `${Math.min(100, share)}%` }} />
+                      </span>
+                      {share.toFixed(0)}%
+                    </span>
+                  </td>
+                  <td className="muted">{r.inPerson ? fmt(r.inPerson) : '—'}</td>
+                  <td className="muted">{r.mail ? fmt(r.mail) : '—'}</td>
+                  <td>
+                    {p && g ? (
+                      <span className="party-cell">
+                        <span className="mini-bar" aria-hidden>
+                          <span className="tbar-D" style={{ width: `${pct(p.D, r.voted)}%` }} />
+                          <span className="tbar-U" style={{ width: `${pct(p.none, r.voted)}%` }} />
+                          <span className="tbar-R" style={{ width: `${pct(p.R, r.voted)}%` }} />
+                        </span>
+                        <span className={`name-${g.party}`}>{g.text}</span>
+                      </span>
+                    ) : (
+                      <span className="muted">No party registration</span>
+                    )}
+                  </td>
+                  <td className="muted">
+                    <a href={r.source} target="_blank" rel="noreferrer">
+                      {dateLabel(r.updated)}
+                    </a>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p className="muted hint">
+        From the{' '}
+        <a href={national.source} target="_blank" rel="noreferrer">
+          UF Election Lab
+        </a>
+        , file updated {when(national.asOf)}. Alabama and New Hampshire don't publish early-vote numbers. "Other" is
+        unaffiliated plus minor parties. Hover a row for the Lab's notes on that state; click a date for the state's own
+        source.
+      </p>
+    </section>
+  )
+}
+
 // Early-vote turnout from states that publish it daily (see server/turnout.ts).
 export function Turnout() {
   const [file, setFile] = useState<TurnoutFile | null>(null)
@@ -152,14 +288,15 @@ export function Turnout() {
       <p className="muted turnout-intro">
         Who has voted so far, by registered party. These are ballots cast, not votes counted: nobody knows how they voted
         until polls close. Democrats tend to vote early and by mail more than Republicans, so a Democratic lead here is
-        expected and says little on its own. Compare with {file?.states[0]?.baseline.label ?? '2022'} instead. States post
-        once a day, early morning.
+        expected and says little on its own. Compare with 2022 instead. States post once a day. Votes cast on Election Day
+        don't show up here; once polls close, follow the counted votes on the Results tab.
       </p>
       {error && <div className="banner">{error}</div>}
       {file && file.states.length === 0 && <p className="muted">No turnout yet. Run <code>npm run fetch -- --turnout</code>.</p>}
       <div className="turnout-grid">
         {file?.states.map((s) => <StateCard key={s.state} s={s} />)}
       </div>
+      {file?.national && <NationalTable national={file.national} />}
     </section>
   )
 }

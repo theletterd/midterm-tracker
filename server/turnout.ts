@@ -1,7 +1,8 @@
 // Early and mail ballots already cast, by registered party, from states that publish daily
 // files. These are ballots cast, not votes counted: no state releases how anyone voted
-// before polls close. Only NC and FL for now; both update once a day, early morning.
-import type { PartySplit, TurnoutFile, TurnoutState } from '../src/data/types.ts'
+// before polls close. NC and FL come straight from the states, with 2022 comparisons;
+// every other state comes from the UF Election Lab's national file.
+import type { PartySplit, TurnoutFile, TurnoutRow, TurnoutState } from '../src/data/types.ts'
 import { request } from './http.ts'
 import { readJson, TURNOUT_FILE, writeJson } from './store.ts'
 
@@ -106,12 +107,63 @@ async function florida(): Promise<Current> {
 
 const SOURCES = { NC: northCarolina, FL: florida }
 
+const UF_URL = 'https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv'
+export const UF_PAGE = 'https://election.lab.ufl.edu/early-vote/2026-early-voting/'
+
+// Minimal CSV parsing: quoted fields may hold commas and doubled quotes.
+function parseCsv(text: string): Record<string, string>[] {
+  const rows: string[][] = []
+  let row: string[] = []
+  let field = ''
+  let quoted = false
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i]
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') field += text[++i]
+      else if (c === '"') quoted = false
+      else field += c
+    } else if (c === '"') quoted = true
+    else if (c === ',') row.push(field), (field = '')
+    else if (c === '\n') row.push(field), rows.push(row), (row = []), (field = '')
+    else if (c !== '\r') field += c
+  }
+  if (field || row.length) row.push(field), rows.push(row)
+  const [head, ...body] = rows
+  return body.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ''])))
+}
+
+// One row per state, ballots cast so far split by method and (where states register
+// voters by party) by party. Columns are zero where a state doesn't report them.
+async function national(): Promise<NonNullable<TurnoutFile['national']>> {
+  const res = await request(UF_URL)
+  const n = (v: string) => Math.round(Number(v) || 0)
+  const rows = parseCsv(await res.text()).map((r): TurnoutRow => {
+    const [m, d, y] = r.last_update.split('/')
+    const hasParty = n(r.voted_dem) + n(r.voted_rep) > 0
+    return {
+      state: r.state_abbv,
+      name: r.state,
+      updated: `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`,
+      source: r.data_source,
+      notes: r.notes && r.notes !== 'NA' ? r.notes : undefined,
+      voted: n(r.voted_all),
+      inPerson: n(r.inperson_all),
+      mail: n(r.accept_all),
+      turnout2022: n(r.turn_2022),
+      parties: hasParty ? { D: n(r.voted_dem), R: n(r.voted_rep), none: n(r.voted_none) } : null,
+    }
+  })
+  if (rows.length < 40) throw new Error(`UF file has only ${rows.length} states`)
+  const modified = res.headers.get('last-modified')
+  return { asOf: modified ? new Date(modified).toISOString() : new Date().toISOString(), source: UF_PAGE, rows }
+}
+
 // Fetches every state and writes public/turnout.json, adding a history point whenever a
 // state posts a new update. A state that fails keeps its last good numbers.
 export async function fetchTurnout(): Promise<string> {
-  const file = await readJson<TurnoutFile>(TURNOUT_FILE, { checkedAt: null, states: [] })
+  const file = await readJson<TurnoutFile>(TURNOUT_FILE, { checkedAt: null, states: [], national: null })
   const codes = Object.keys(SOURCES) as (keyof typeof SOURCES)[]
-  const results = await Promise.allSettled(codes.map((c) => SOURCES[c]()))
+  const [results, [nat]] = await Promise.all([Promise.allSettled(codes.map((c) => SOURCES[c]())), Promise.allSettled([national()])])
   const notes: string[] = []
   file.states = codes.flatMap((code, i): TurnoutState[] => {
     const r = results[i]
@@ -126,6 +178,11 @@ export async function fetchTurnout(): Promise<string> {
     notes.push(`${code} ${cur.total.toLocaleString()}`)
     return [{ ...cur, history }]
   })
+  if (nat.status === 'rejected') notes.push(`UF failed: ${nat.reason}`)
+  else {
+    file.national = nat.value
+    notes.push(`${nat.value.rows.length} states from UF`)
+  }
   file.checkedAt = new Date().toISOString()
   await writeJson(TURNOUT_FILE, file)
   return notes.join(' · ')

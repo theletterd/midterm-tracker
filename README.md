@@ -34,10 +34,14 @@ refresh get a yellow edge.
 
 ## Turnout
 
-The **Turnout** tab shows early and mail ballots already cast in North Carolina and Florida, by
-registered party, against the 2022 final numbers. The dev server pulls them every 30 minutes
-(`server/turnout.ts`); both states post once a day, early morning. These are ballots cast, not
-votes: no state counts or releases them before polls close.
+The **Turnout** tab shows early and mail ballots already cast. North Carolina and Florida get
+detailed cards straight from the states, by registered party, against the 2022 final numbers.
+Below them, a table covers every state that publishes early-vote numbers (all but Alabama and New
+Hampshire), from the [UF Election Lab](https://election.lab.ufl.edu/early-vote/2026-early-voting/)'s
+national file, with a party split wherever the state registers voters by party. The dev server
+pulls everything every 30 minutes (`server/turnout.ts`); states post once a day. These are ballots
+cast, not votes: no state counts or releases them before polls close, and Election Day votes
+never appear here.
 
 ## Live results
 
@@ -97,6 +101,6 @@ FETCH=0 npm run dev           # dev server without the background fetcher, call 
 | `public/history.json` | Snapshots of each race over the night | State feeds |
 | `public/calls.json` | DDHQ calls read from Bluesky, and their status | DDHQ + you |
 | `public/nominees.json` | Candidate names per race, for matching calls | State feeds |
-| `public/turnout.json` | Early and mail ballots cast by party, daily | NC State Board, FL Division of Elections |
+| `public/turnout.json` | Early and mail ballots cast by party, daily | NC State Board, FL Division of Elections, UF Election Lab |
 
 Senate control: Democrats need 51 (VP Vance breaks ties), Republicans need 50.
