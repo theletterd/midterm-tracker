@@ -2,14 +2,18 @@
 const UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
 
-export async function getText(url: string, init: RequestInit = {}): Promise<string> {
+export async function request(url: string, init: RequestInit = {}): Promise<Response> {
   const res = await fetch(url, {
     ...init,
     headers: { 'User-Agent': UA, ...(init.headers ?? {}) },
     signal: AbortSignal.timeout(20_000),
   })
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`)
-  return res.text()
+  return res
+}
+
+export async function getText(url: string, init: RequestInit = {}): Promise<string> {
+  return (await request(url, init)).text()
 }
 
 export async function getJson<T = any>(url: string, init?: RequestInit): Promise<T> {

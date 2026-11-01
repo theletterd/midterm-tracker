@@ -1,0 +1,91 @@
+{
+  "checkedAt": "2026-11-01T18:50:58.606Z",
+  "states": [
+    {
+      "state": "NC",
+      "name": "North Carolina",
+      "asOf": "2026-11-01T09:41:56.000Z",
+      "source": "NC State Board of Elections",
+      "url": "https://www.ncsbe.gov/results-data/absentee-data",
+      "total": 2816820,
+      "parties": {
+        "D": 1080439,
+        "R": 736891,
+        "unaffiliated": 990783,
+        "other": 8707
+      },
+      "methods": [
+        {
+          "label": "Early in person",
+          "total": 2724424
+        },
+        {
+          "label": "Mail",
+          "total": 92396
+        }
+      ],
+      "baseline": {
+        "label": "2022",
+        "total": 2198550,
+        "parties": {
+          "D": 840205,
+          "R": 682377,
+          "unaffiliated": 669831,
+          "other": 6137
+        },
+        "turnout": 3790202
+      },
+      "history": [
+        {
+          "asOf": "2026-11-01T09:41:56.000Z",
+          "total": 2816820,
+          "D": 1080439,
+          "R": 736891
+        }
+      ]
+    },
+    {
+      "state": "FL",
+      "name": "Florida",
+      "asOf": "2026-11-01T13:09:00.000Z",
+      "source": "Florida Division of Elections",
+      "url": "https://countyfilesvbm-ev.floridados.gov/VoteByMailEarlyVotingReports/PublicStats",
+      "total": 5159537,
+      "parties": {
+        "D": 1943328,
+        "R": 2098673,
+        "unaffiliated": 985610,
+        "other": 131926
+      },
+      "methods": [
+        {
+          "label": "Early in person",
+          "total": 3256797
+        },
+        {
+          "label": "Mail",
+          "total": 1902740
+        }
+      ],
+      "baseline": {
+        "label": "2022",
+        "total": 5059413,
+        "parties": {
+          "D": 1870486,
+          "R": 2168758,
+          "unaffiliated": 947728,
+          "other": 72441
+        },
+        "turnout": 7796916
+      },
+      "history": [
+        {
+          "asOf": "2026-11-01T13:09:00.000Z",
+          "total": 5159537,
+          "D": 1943328,
+          "R": 2098673
+        }
+      ]
+    }
+  ]
+}

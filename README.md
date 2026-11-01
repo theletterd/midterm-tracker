@@ -32,6 +32,13 @@ tab shows a count of new Curated posts since you last looked:
 Posts are text only (no images or embeds); click one to open it on Bluesky. New posts since the last
 refresh get a yellow edge.
 
+## Turnout
+
+The **Turnout** tab shows early and mail ballots already cast in North Carolina and Florida, by
+registered party, against the 2022 final numbers. The dev server pulls them every 30 minutes
+(`server/turnout.ts`); both states post once a day, early morning. These are ballots cast, not
+votes: no state counts or releases them before polls close.
+
 ## Live results
 
 `npm run dev` also pulls official state results every 2 minutes and writes them to
@@ -71,10 +78,11 @@ the state results feeds, DDHQ's own primary calls this year, or the incumbent's 
 DDHQ calls aren't AP calls; they sometimes come earlier or later. Change any call by clicking the race.
 
 ```bash
-npm run fetch                 # pull results and calls once and write them
+npm run fetch                 # pull results, calls and turnout once and write them
 npm run fetch -- --test-calls # parse DDHQ's posts since Sept 1 and show how they'd resolve
 npm run fetch -- --test-2024  # parse the 2024 general feeds and print, without writing
-FETCH=0 npm run dev           # dev server without the background fetcher and call checks
+npm run fetch -- --turnout    # pull early-vote turnout only
+FETCH=0 npm run dev           # dev server without the background fetcher, call checks and turnout
 ```
 
 ## Data
@@ -89,5 +97,6 @@ FETCH=0 npm run dev           # dev server without the background fetcher and ca
 | `public/history.json` | Snapshots of each race over the night | State feeds |
 | `public/calls.json` | DDHQ calls read from Bluesky, and their status | DDHQ + you |
 | `public/nominees.json` | Candidate names per race, for matching calls | State feeds |
+| `public/turnout.json` | Early and mail ballots cast by party, daily | NC State Board, FL Division of Elections |
 
 Senate control: Democrats need 51 (VP Vance breaks ties), Republicans need 50.

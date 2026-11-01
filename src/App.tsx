@@ -5,6 +5,7 @@ import { RaceCard, pollSummary } from './components/RaceCard'
 import { POLLS_AS_OF } from './data/polls'
 import { RaceEditor } from './components/RaceEditor'
 import { SocialFeeds } from './components/SocialFeeds'
+import { Turnout } from './components/Turnout'
 import { UsMap } from './components/UsMap'
 import { RATINGS, RATING_LABEL, type Chamber, type Race, type Rating, type Result, type Snapshot } from './data/types'
 import { CHAMBERS, favoredParty, isCompetitive, isFlip, leader, ratingCounts, reportingText, resultTally, type ChamberInfo } from './lib/tally'
@@ -12,7 +13,7 @@ import { useResults } from './lib/useResults'
 
 const ELECTION_DAY = new Date('2026-11-03T00:00:00')
 const TABS: Chamber[] = ['senate', 'house', 'gov']
-type Tab = Chamber | 'bluesky'
+type Tab = Chamber | 'turnout' | 'bluesky'
 
 const fmtDate = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString([], { month: 'short', day: 'numeric' })
 
@@ -45,7 +46,7 @@ export default function App() {
     if (tabRef.current !== 'bluesky') setUnseenPosts((u) => u + n)
   }, [])
 
-  const info = tab === 'bluesky' ? null : CHAMBERS[tab]
+  const info = tab === 'bluesky' || tab === 'turnout' ? null : CHAMBERS[tab]
   const days = daysUntilElection(updated)
 
   return (
@@ -88,6 +89,9 @@ export default function App() {
             <small>{CHAMBERS[c].races.length}</small>
           </button>
         ))}
+        <button role="tab" aria-selected={tab === 'turnout'} className={`tab-turnout ${tab === 'turnout' ? 'active' : ''}`} onClick={() => setTab('turnout')}>
+          Turnout
+        </button>
         <button
           role="tab"
           aria-selected={tab === 'bluesky'}
@@ -101,6 +105,8 @@ export default function App() {
           {unseenPosts > 0 && <span className="badge" aria-label={`${unseenPosts} new posts`}>{unseenPosts > 99 ? '99+' : unseenPosts}</span>}
         </button>
       </nav>
+
+      {tab === 'turnout' && <Turnout />}
 
       {/* Stays mounted on every tab so polling and new-post tracking keep running. */}
       <div hidden={tab !== 'bluesky'}>

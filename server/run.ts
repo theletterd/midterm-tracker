@@ -2,13 +2,17 @@
 //   --test-2024   print what the 2024 general feeds parse to, without writing
 //   --test-calls  parse DDHQ's posts since Sept 1 (primaries included) and show how each
 //                 would resolve against the current board, without writing
+//   --turnout     pull early-vote turnout (public/turnout.json) only
 import { HOUSE } from '../src/data/house.ts'
 import { checkCalls, fetchPosts, loadPrimaryWinners, parsePost, resolveCall } from './ddhq.ts'
 import { FEEDS_2024, FEEDS_2026 } from './feeds.ts'
 import { collect, fetchOnce, formatReports } from './fetcher.ts'
+import { fetchTurnout } from './turnout.ts'
 import { update, type State } from './store.ts'
 
-if (process.argv.includes('--test-calls')) {
+if (process.argv.includes('--turnout')) {
+  console.log(`Turnout: ${await fetchTurnout()}`)
+} else if (process.argv.includes('--test-calls')) {
   const posts = await fetchPosts('2026-09-01T00:00:00Z', new Set(), 30)
   let state!: State
   await update((s) => {
@@ -45,4 +49,5 @@ if (process.argv.includes('--test-calls')) {
   console.log(formatReports(await fetchOnce(FEEDS_2026)))
   const c = await checkCalls()
   console.log(`DDHQ: ${c.newCalls} new calls, ${c.applied} applied, ${c.review} need review`)
+  console.log(`Turnout: ${await fetchTurnout()}`)
 }

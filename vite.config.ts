@@ -4,17 +4,20 @@ import { checkCalls } from './server/ddhq.ts'
 import { FEEDS_2026 } from './server/feeds.ts'
 import { fetchOnce, formatReports } from './server/fetcher.ts'
 import { update } from './server/store.ts'
+import { fetchTurnout } from './server/turnout.ts'
 import { applyCall } from './src/lib/calls.ts'
 
 const FETCH_EVERY_MS = 2 * 60_000
 const CALLS_EVERY_MS = 60_000
+const TURNOUT_EVERY_MS = 30 * 60_000
 
 // Dev-server backend:
 // - POST /api/results {id, update} saves one race's call and note.
 // - POST /api/calls {uri, action, party?} resolves a DDHQ call waiting for review.
 // - Every 2 minutes, pulls official state results into public/results.json and
-//   public/history.json; every minute, checks DDHQ's Bluesky for race calls.
-//   Set FETCH=0 to turn both off.
+//   public/history.json; every minute, checks DDHQ's Bluesky for race calls; every
+//   30 minutes, pulls early-vote turnout into public/turnout.json. Set FETCH=0 to turn
+//   all of them off.
 function resultsBackend(): Plugin {
   return {
     name: 'results-backend',
@@ -97,9 +100,17 @@ function resultsBackend(): Plugin {
           log.error(`[calls] check failed: ${err}`, { timestamp: true })
         }
       }
+      const turnoutTick = async () => {
+        try {
+          log.info(`[turnout] ${await fetchTurnout()}`, { timestamp: true })
+        } catch (err) {
+          log.error(`[turnout] fetch failed: ${err}`, { timestamp: true })
+        }
+      }
       tick()
       callTick()
-      const timers = [setInterval(tick, FETCH_EVERY_MS), setInterval(callTick, CALLS_EVERY_MS)]
+      turnoutTick()
+      const timers = [setInterval(tick, FETCH_EVERY_MS), setInterval(callTick, CALLS_EVERY_MS), setInterval(turnoutTick, TURNOUT_EVERY_MS)]
       server.httpServer?.on('close', () => timers.forEach(clearInterval))
     },
   }

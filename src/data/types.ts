@@ -78,3 +78,29 @@ export interface ResultsFile {
   updated: string | null
   races: Record<string, Result>
 }
+
+// Ballots already cast before Election Day, by registered party. Written by server/turnout.ts.
+export interface PartySplit {
+  D: number
+  R: number
+  unaffiliated: number
+  other: number
+}
+
+export interface TurnoutState {
+  state: string
+  name: string
+  asOf: string // when the state compiled the numbers
+  source: string
+  url: string
+  total: number
+  parties: PartySplit
+  methods: { label: string; total: number }[]
+  baseline: { label: string; total: number; parties: PartySplit; turnout: number } // 2022
+  history: { asOf: string; total: number; D: number; R: number }[] // one point per state update
+}
+
+export interface TurnoutFile {
+  checkedAt: string | null
+  states: TurnoutState[]
+}

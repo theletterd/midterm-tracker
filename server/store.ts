@@ -6,6 +6,7 @@ export const RESULTS_FILE = resolve(ROOT, 'public/results.json')
 export const HISTORY_FILE = resolve(ROOT, 'public/history.json')
 export const CALLS_FILE = resolve(ROOT, 'public/calls.json')
 export const NOMINEES_FILE = resolve(ROOT, 'public/nominees.json')
+export const TURNOUT_FILE = resolve(ROOT, 'public/turnout.json')
 
 export interface StoredResult {
   winner?: 'D' | 'R' | 'I'
@@ -64,7 +65,7 @@ export interface State {
   nominees: NomineesFile
 }
 
-async function readJson<T>(file: string, fallback: T): Promise<T> {
+export async function readJson<T>(file: string, fallback: T): Promise<T> {
   try {
     return JSON.parse(await readFile(file, 'utf8')) as T
   } catch {
@@ -73,7 +74,7 @@ async function readJson<T>(file: string, fallback: T): Promise<T> {
 }
 
 // Write to a temp file and rename, so the browser never reads a half-written file.
-async function writeJson(file: string, data: unknown) {
+export async function writeJson(file: string, data: unknown) {
   const tmp = `${file}.tmp`
   await writeFile(tmp, JSON.stringify(data, null, 2) + '\n')
   await rename(tmp, file)

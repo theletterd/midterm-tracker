@@ -265,6 +265,35 @@ legend { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-sp
 .feed-empty { padding: 14px; font-size: 13px; }
 
 .seg-control.hidden { visibility: hidden; }
-.tab-bluesky { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+.tab-turnout { margin-left: auto; }
+.tab-bluesky { display: inline-flex; align-items: center; gap: 6px; }
 .badge { background: var(--tossup); color: #4a3b07; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 7px; line-height: 1.5; }
 .feeds-intro { font-size: 13px; margin: 0 0 10px; }
+
+/* Turnout tab */
+.turnout-intro { font-size: 13px; margin: 0 0 14px; max-width: 760px; line-height: 1.5; }
+.turnout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+@media (max-width: 860px) { .turnout-grid { grid-template-columns: 1fr; } }
+.turnout-card { margin-bottom: 0; }
+.turnout-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.turnout-head h3 { margin: 0; font-size: 18px; }
+.turnout-head .muted { font-size: 12.5px; }
+.turnout-head a { color: inherit; }
+.turnout-big { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.turnout-compare { font-size: 13.5px; margin: 4px 0 14px; }
+.turnout-bar { display: flex; height: 18px; border-radius: 4px; overflow: hidden; background: var(--map-empty); }
+.turnout-bar span { display: block; }
+.tbar-D { background: var(--d-solid); }
+.tbar-R { background: var(--r-solid); }
+.tbar-U { background: var(--uncalled); }
+.tbar-O { background: var(--ind); }
+.tdot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.turnout-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 10px; font-variant-numeric: tabular-nums; }
+.turnout-table th { text-align: left; font-weight: 500; color: var(--muted); font-size: 12px; padding: 4px 6px; border-bottom: 1px solid var(--border); }
+.turnout-table td { padding: 5px 6px; border-bottom: 1px solid var(--border); }
+.turnout-table tr:last-child td { border-bottom: 0; }
+.turnout-delta { font-size: 12px; }
+.turnout-gap { font-size: 14px; margin: 12px 0 4px; }
+.turnout-methods { font-size: 12.5px; margin: 0; }
+.turnout-history { margin-top: 10px; font-size: 13px; }
+.turnout-history summary { cursor: pointer; color: var(--muted); }
