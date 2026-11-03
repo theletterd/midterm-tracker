@@ -1,9 +1,9 @@
 import type { Candidate, Party, Race, Rating } from './types.ts'
 
-// Source: Cook Political Report Senate ratings, Oct 30, 2026
+// Source: Cook Political Report Senate ratings, Nov 2, 2026
 // https://www.cookpolitical.com/ratings/senate-race-ratings
 // Nominees for competitive races via 270toWin (Oct 20, 2026) and RealClearPolling; verify before relying on them.
-export const SENATE_AS_OF = '2026-10-30'
+export const SENATE_AS_OF = '2026-11-02'
 
 // Seats not on the ballot this year (Cook). Sanders and King are counted with Democrats.
 export const SENATE_NOT_UP = { D: 34, R: 31 }
@@ -36,6 +36,7 @@ export const SENATE: Race[] = [
   seat('GA', 'LD', 'D', 'Ossoff', [d('Jon Ossoff', true), r('Mike Collins')]),
   seat('NC', 'LD', 'R', 'Open', [d('Roy Cooper'), r('Michael Whatley')], 'Tillis retiring'),
   // Lean D
+  seat('MI', 'TD', 'D', 'Open', [d('Abdul El-Sayed'), r('Mike Rogers')], 'Peters retiring'),
   seat('MN', 'TD', 'D', 'Open', [d('Peggy Flanagan'), r('Michele Tafoya')], 'Smith retiring'),
   seat('NH', 'TD', 'D', 'Open', [d('Chris Pappas'), r('John Sununu')], 'Shaheen retiring'),
   // Toss Up
@@ -43,7 +44,6 @@ export const SENATE: Race[] = [
   seat('IA', 'TU', 'R', 'Open', [d('Josh Turek'), r('Ashley Hinson')], 'Ernst retiring'),
   seat('KS', 'TU', 'R', 'Marshall', [d('Adam Hamilton'), r('Roger Marshall', true)]),
   seat('ME', 'TU', 'R', 'Collins', [d('Troy Jackson'), r('Susan Collins', true)]),
-  seat('MI', 'TU', 'D', 'Open', [d('Abdul El-Sayed'), r('Mike Rogers')], 'Peters retiring'),
   seat('OH', 'TU', 'R', 'Husted', [d('Sherrod Brown'), r('Jon Husted', true)], 'Special election (Vance seat)'),
   seat('TX', 'TU', 'R', 'Open', [d('James Talarico'), r('Ken Paxton')], 'Cornyn lost primary'),
   // Lean R

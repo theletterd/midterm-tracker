@@ -1,9 +1,9 @@
 import type { Party, Race, Rating } from './types.ts'
 
-// Source: Cook Political Report House ratings, Oct 30, 2026 (all 435 seats).
+// Source: Cook Political Report House ratings, Nov 2, 2026 (all 435 seats).
 // https://www.cookpolitical.com/ratings/house-race-ratings
 // Format: rating|district|incumbent (or "OPEN (prior member)", "VACANT")|party holding the seat
-export const HOUSE_AS_OF = "2026-10-30"
+export const HOUSE_AS_OF = "2026-11-02"
 
 const RAW = [
   "SD|AL-07|Sewell|D",
@@ -262,20 +262,24 @@ const RAW = [
   "TR|OH-10|Turner|R",
   "TR|OH-15|Carey|R",
   "TR|TX-23|VACANT|R",
+  "TR|VA-05|McGuire|R",
   "TR|WI-01|Steil|R",
   "LR|AR-02|Hill|R",
   "LR|CO-03|Hurd|R",
+  "LR|FL-04|Bean|R",
   "LR|FL-16|OPEN (Buchanan)|R",
   "LR|KS-02|Schmidt|R",
   "LR|MO-02|Wagner|R",
   "LR|NC-03|Murphy|R",
   "LR|NC-05|Foxx|R",
+  "LR|NC-07|Rouzer|R",
   "LR|NC-09|Hudson|R",
   "LR|NC-13|Knott|R",
+  "LR|NC-14|Moore|R",
   "LR|NE-01|Flood|R",
   "LR|NJ-02|Van Drew|R",
+  "LR|TN-09|OPEN (Cohen)|D",
   "LR|TX-09|OPEN (Green)|D",
-  "LR|VA-05|McGuire|R",
   "LR|WA-05|Baumgartner|R",
   "SR|AL-01|OPEN (Moore)|R",
   "SR|AL-03|Rogers|R",
@@ -295,7 +299,6 @@ const RAW = [
   "SR|FL-01|Patronis|R",
   "SR|FL-02|OPEN (Dunn)|R",
   "SR|FL-03|Cammack|R",
-  "SR|FL-04|Bean|R",
   "SR|FL-05|Rutherford|R",
   "SR|FL-06|Fine|R",
   "SR|FL-08|Haridopolos|R",
@@ -358,10 +361,8 @@ const RAW = [
   "SR|MS-04|Ezell|R",
   "SR|MT-02|Downing|R",
   "SR|NC-06|McDowell|R",
-  "SR|NC-07|Rouzer|R",
   "SR|NC-08|Harris|R",
   "SR|NC-10|Harrigan|R",
-  "SR|NC-14|Moore|R",
   "SR|ND-AL|Fedorchak|R",
   "SR|NE-03|Smith|R",
   "SR|NJ-04|Smith|R",
@@ -403,7 +404,6 @@ const RAW = [
   "SR|TN-06|OPEN (Rose)|R",
   "SR|TN-07|Van Epps|R",
   "SR|TN-08|Kustoff|R",
-  "SR|TN-09|OPEN (Cohen)|D",
   "SR|TX-01|Moran|R",
   "SR|TX-02|OPEN (Crenshaw)|R",
   "SR|TX-03|Self|R",
