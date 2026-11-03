@@ -230,6 +230,7 @@ function Nationwide({ national, counted }: { national: NonNullable<TurnoutFile['
           </span>
         </div>
       </div>
+      <NationalBreakdown rows={national.rows} />
       {votes > 0 && (
         <div className="nation-compare">
           <span className="muted">In those {live.length} states</span>
@@ -246,6 +247,75 @@ function Nationwide({ national, counted }: { national: NonNullable<TurnoutFile['
         the Results tab.
       </p>
     </section>
+  )
+}
+
+// Early ballots across the country: in person vs mail everywhere, and the party split
+// across the states that register voters by party. Shares use only ballots with a party on
+// file, since a few states (CA, ID) break down fewer ballots than their total.
+function NationalBreakdown({ rows }: { rows: TurnoutRow[] }) {
+  const inPerson = rows.reduce((n, r) => n + r.inPerson, 0)
+  const mail = rows.reduce((n, r) => n + r.mail, 0)
+  const withParty = rows.filter((r) => r.parties)
+  const D = withParty.reduce((n, r) => n + r.parties!.D, 0)
+  const R = withParty.reduce((n, r) => n + r.parties!.R, 0)
+  const none = withParty.reduce((n, r) => n + r.parties!.none, 0)
+  const known = D + R + none
+  const g = gap({ D, R, unaffiliated: none, other: 0 }, known)
+  const missing = rows.filter((r) => !r.parties).sort((a, b) => b.voted - a.voted)
+  const missingVotes = missing.reduce((n, r) => n + r.voted, 0)
+
+  return (
+    <div className="nation-breakdown">
+      <div className="breakdown-row">
+        <h4>How early ballots were cast</h4>
+        <div className="turnout-bar" role="img" aria-label="Early ballots in person and by mail">
+          <span className="tbar-inperson" style={{ width: `${pct(inPerson, inPerson + mail)}%` }} />
+          <span className="tbar-mail" style={{ width: `${pct(mail, inPerson + mail)}%` }} />
+        </div>
+        <div className="breakdown-legend">
+          <span>
+            <i className="tdot tbar-inperson" /> In person <b>{short(inPerson)}</b> <span className="muted">{pct(inPerson, inPerson + mail).toFixed(0)}%</span>
+          </span>
+          <span>
+            <i className="tdot tbar-mail" /> Mail <b>{short(mail)}</b> <span className="muted">{pct(mail, inPerson + mail).toFixed(0)}%</span>
+          </span>
+        </div>
+      </div>
+      <div className="breakdown-row">
+        <h4>
+          By registered party <span className="muted">in the {withParty.length} states with party data · {short(known)} ballots</span>
+        </h4>
+        <div className="turnout-bar" role="img" aria-label="Early ballots by registered party">
+          <span className="tbar-D" style={{ width: `${pct(D, known)}%` }} />
+          <span className="tbar-U" style={{ width: `${pct(none, known)}%` }} />
+          <span className="tbar-R" style={{ width: `${pct(R, known)}%` }} />
+        </div>
+        <div className="breakdown-legend">
+          <span>
+            <i className="tdot tbar-D" /> Democrats <b>{short(D)}</b> <span className="muted">{pct(D, known).toFixed(1)}%</span>
+          </span>
+          <span>
+            <i className="tdot tbar-U" /> Unaffiliated and other <b>{short(none)}</b> <span className="muted">{pct(none, known).toFixed(1)}%</span>
+          </span>
+          <span>
+            <i className="tdot tbar-R" /> Republicans <b>{short(R)}</b> <span className="muted">{pct(R, known).toFixed(1)}%</span>
+          </span>
+          <span>
+            Gap: <b className={`name-${g.party}`}>{g.text}</b>
+          </span>
+        </div>
+        <p className="muted breakdown-note">
+          Leaves out {missing.length} states without party data ({short(missingVotes)} ballots), including{' '}
+          {missing
+            .slice(0, 5)
+            .map((r) => r.name)
+            .join(', ')}
+          . Texas and Georgia alone are {short(missing.slice(0, 2).reduce((n, r) => n + r.voted, 0))} ballots.
+          A Democratic edge is normal for early voting; there's no national 2022 baseline to compare against here.
+        </p>
+      </div>
+    </div>
   )
 }
 

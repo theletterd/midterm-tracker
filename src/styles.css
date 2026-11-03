@@ -344,3 +344,11 @@ legend { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-sp
 .turnout-states .group-row th { border-bottom: 0; }
 .turnout-states td.group-counted { background: color-mix(in srgb, var(--counted) 3%, transparent); }
 @media (max-width: 640px) { .turnout-pair { grid-template-columns: 1fr; } .nation-compare { grid-template-columns: 1fr; } }
+.nation-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+@media (max-width: 760px) { .nation-breakdown { grid-template-columns: 1fr; } }
+.breakdown-row h4 { margin: 0 0 8px; font-size: 13px; font-weight: 600; }
+.breakdown-row h4 .muted { font-weight: 400; margin-left: 4px; }
+.breakdown-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+.breakdown-note { font-size: 12px; margin: 8px 0 0; line-height: 1.45; }
+.tbar-inperson { background: var(--early); }
+.tbar-mail { background: color-mix(in srgb, var(--early) 45%, var(--map-empty)); }

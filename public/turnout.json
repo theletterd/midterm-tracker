@@ -1,27 +1,27 @@
 {
-  "checkedAt": "2026-11-01T18:55:19.897Z",
+  "checkedAt": "2026-11-03T00:38:09.851Z",
   "states": [
     {
       "state": "NC",
       "name": "North Carolina",
-      "asOf": "2026-11-01T09:41:56.000Z",
+      "asOf": "2026-11-02T09:42:38.000Z",
       "source": "NC State Board of Elections",
       "url": "https://www.ncsbe.gov/results-data/absentee-data",
-      "total": 2816820,
+      "total": 2819921,
       "parties": {
-        "D": 1080439,
-        "R": 736891,
-        "unaffiliated": 990783,
-        "other": 8707
+        "D": 1081910,
+        "R": 737349,
+        "unaffiliated": 991939,
+        "other": 8723
       },
       "methods": [
         {
           "label": "Early in person",
-          "total": 2724424
+          "total": 2726324
         },
         {
           "label": "Mail",
-          "total": 92396
+          "total": 93597
         }
       ],
       "baseline": {
@@ -41,30 +41,36 @@
           "total": 2816820,
           "D": 1080439,
           "R": 736891
+        },
+        {
+          "asOf": "2026-11-02T09:42:38.000Z",
+          "total": 2819921,
+          "D": 1081910,
+          "R": 737349
         }
       ]
     },
     {
       "state": "FL",
       "name": "Florida",
-      "asOf": "2026-11-01T13:09:00.000Z",
+      "asOf": "2026-11-02T16:03:00.000Z",
       "source": "Florida Division of Elections",
       "url": "https://countyfilesvbm-ev.floridados.gov/VoteByMailEarlyVotingReports/PublicStats",
-      "total": 5159537,
+      "total": 5408792,
       "parties": {
-        "D": 1943328,
-        "R": 2098673,
-        "unaffiliated": 985610,
-        "other": 131926
+        "D": 2043079,
+        "R": 2176256,
+        "unaffiliated": 1050687,
+        "other": 138770
       },
       "methods": [
         {
           "label": "Early in person",
-          "total": 3256797
+          "total": 3467309
         },
         {
           "label": "Mail",
-          "total": 1902740
+          "total": 1941483
         }
       ],
       "baseline": {
@@ -84,65 +90,77 @@
           "total": 5159537,
           "D": 1943328,
           "R": 2098673
+        },
+        {
+          "asOf": "2026-11-02T13:09:00.000Z",
+          "total": 5402229,
+          "D": 2039578,
+          "R": 2174589
+        },
+        {
+          "asOf": "2026-11-02T16:03:00.000Z",
+          "total": 5408792,
+          "D": 2043079,
+          "R": 2176256
         }
       ]
     }
   ],
   "national": {
-    "asOf": "2026-11-01T18:28:46.000Z",
+    "asOf": "2026-11-02T23:40:41.000Z",
     "source": "https://election.lab.ufl.edu/early-vote/2026-early-voting/",
     "rows": [
       {
         "state": "AK",
         "name": "Alaska",
-        "updated": "2026-10-31",
+        "updated": "2026-11-01",
         "source": "https://www.elections.alaska.gov/research/statistics/#aeqstats",
-        "voted": 86317,
-        "inPerson": 56640,
-        "mail": 29677,
+        "voted": 90570,
+        "inPerson": 58262,
+        "mail": 32308,
         "turnout2022": 267047,
         "parties": null
       },
       {
         "state": "AZ",
         "name": "Arizona",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://www.stealth-analytics.com/early-ballots",
         "notes": "Arizona's request_* figures are mail ballots issued (sent out), not applications received - this state's early voting is run through a permanent early-voting list rather than a one-off per-election request.",
-        "voted": 1595938,
+        "voted": 1648197,
         "inPerson": 0,
-        "mail": 1595938,
+        "mail": 1648197,
         "turnout2022": 2592313,
         "parties": {
-          "D": 593891,
-          "R": 607596,
-          "none": 394451
+          "D": 613185,
+          "R": 625143,
+          "none": 409869
         }
       },
       {
         "state": "AR",
         "name": "Arkansas",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "Arkansas Secretary of State",
-        "voted": 518198,
-        "inPerson": 509081,
-        "mail": 9117,
+        "voted": 550338,
+        "inPerson": 540941,
+        "mail": 9397,
         "turnout2022": 914227,
         "parties": {
-          "D": 32839,
-          "R": 46550,
-          "none": 438809
+          "D": 34754,
+          "R": 49408,
+          "none": 466176
         }
       },
       {
         "state": "CA",
         "name": "California",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://www.sos.ca.gov/elections/upcoming-elections/general-election-november-3-2026",
         "notes": "Some statistics provided by [PDI](https://politicaldata.com/). The higher value provided by the California Secretary of State or PDI is used where reporting differences exist. Because PDI, the source for party registration data, does not report by method of voting, all party registration calculations include in-person early and mail ballots.",
-        "voted": 5965896,
-        "inPerson": 226503,
-        "mail": 5739393,
+        "voted": 6351050,
+        "inPerson": 298511,
+        "mail": 6052539,
         "turnout2022": 11146610,
         "parties": {
           "D": 2653319,
@@ -153,274 +171,274 @@
       {
         "state": "CO",
         "name": "Colorado",
-        "updated": "2026-10-31",
+        "updated": "2026-11-01",
         "source": "Colorado Secretary of State",
-        "voted": 1525971,
-        "inPerson": 23546,
-        "mail": 1502425,
+        "voted": 1591323,
+        "inPerson": 23655,
+        "mail": 1567668,
         "turnout2022": 2540666,
         "parties": {
-          "D": 476824,
-          "R": 374685,
-          "none": 674462
+          "D": 495736,
+          "R": 388672,
+          "none": 706915
         }
       },
       {
         "state": "CT",
         "name": "Connecticut",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "Connecticut Secretary of the State",
-        "voted": 467678,
-        "inPerson": 417230,
-        "mail": 50448,
+        "voted": 505945,
+        "inPerson": 455169,
+        "mail": 50776,
         "turnout2022": 1297811,
         "parties": {
-          "D": 225830,
-          "R": 90829,
-          "none": 151019
+          "D": 242289,
+          "R": 98393,
+          "none": 165263
         }
       },
       {
         "state": "DE",
         "name": "Delaware",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "Delaware Department of Elections",
         "notes": "Delaware does not publish mail ballot request data. The \"ballots requested\" figures shown for Delaware are the number of mail ballots received and counted, treated as equal to requests for lack of any other source.",
-        "voted": 137931,
+        "voted": 148738,
         "inPerson": 0,
-        "mail": 137931,
+        "mail": 148738,
         "turnout2022": 325632,
         "parties": {
-          "D": 73271,
-          "R": 38291,
-          "none": 26369
+          "D": 78756,
+          "R": 41148,
+          "none": 28834
         }
       },
       {
         "state": "DC",
         "name": "District of Columbia",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "https://dcboe.org/",
         "notes": "The DC Board of Elections reports ballots in three separate files: mail ballots returned by drop box, mail ballots returned by USPS, and in-person votes cast at Early Vote Centers (EVC). DC is vote-by-mail, so request_all reflects active voter registration rather than anything derived from these files. No party, age, or geographic breakdown is available.",
-        "voted": 88113,
-        "inPerson": 17410,
-        "mail": 70703,
+        "voted": 111150,
+        "inPerson": 27118,
+        "mail": 84032,
         "turnout2022": 205774,
         "parties": null
       },
       {
         "state": "FL",
         "name": "Florida",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://countyfilesvbm-ev.floridados.gov/VoteByMailEarlyVotingReports/PublicStats",
         "notes": "Some Florida statistics are obtained from county websites that may report more recent and higher numbers than the Florida Division of Elections reports.",
-        "voted": 5254007,
-        "inPerson": 3324068,
-        "mail": 1929939,
+        "voted": 5458419,
+        "inPerson": 3467810,
+        "mail": 1990609,
         "turnout2022": 7796916,
         "parties": {
-          "D": 1980166,
-          "R": 2129541,
-          "none": 1144300
+          "D": 2062573,
+          "R": 2192781,
+          "none": 1203065
         }
       },
       {
         "state": "GA",
         "name": "Georgia",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://mvp.sos.ga.gov/s/voter-absentee-files",
         "notes": "Georgia's county-level \"Ballots Issued and Accepted\" and \"Ballots to Date\" downloads (from the state's election-data-hub dashboard, https://sos.ga.gov/page/election-data-hub-unofficial-turnout) are compared against the statewide absentee file, county by county, using whichever is higher - this is how same-day in-person early-voting activity (which the statewide absentee file doesn't carry until the next overnight refresh) gets folded in. No district or demographic breakdown is available from these county-level downloads.",
-        "voted": 2826146,
-        "inPerson": 2705112,
-        "mail": 121034,
+        "voted": 2826388,
+        "inPerson": 2705113,
+        "mail": 121275,
         "turnout2022": 3964926,
         "parties": null
       },
       {
         "state": "HI",
         "name": "Hawaii",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "https://elections.hawaii.gov/resources/absentee-voting-report/",
-        "voted": 230805,
-        "inPerson": 4523,
-        "mail": 226282,
+        "voted": 249140,
+        "inPerson": 5472,
+        "mail": 243668,
         "turnout2022": 423443,
         "parties": null
       },
       {
         "state": "ID",
         "name": "Idaho",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "Idaho Secretary of State",
         "notes": "Idaho's daily absentee file covers mail ballots only - in-person early voting counts are scraped separately from the state's own dashboard (https://voteidaho.gov/data-and-dashboards/absentee-tracker/) and added in as a single statewide/county total, with no party, age, or gender breakdown available for it (the dashboard's own party breakdown mixes mail and in-person together, so it can't be used to split out the in-person-only portion). Congressional and state-legislative district totals are mail ballots only and do not include in-person early voting, so they will run lower than the statewide/county totals.",
-        "voted": 263133,
-        "inPerson": 144127,
-        "mail": 119006,
+        "voted": 263250,
+        "inPerson": 144149,
+        "mail": 119101,
         "turnout2022": 595350,
         "parties": {
-          "D": 22506,
-          "R": 72415,
-          "none": 24085
+          "D": 22518,
+          "R": 72474,
+          "none": 24109
         }
       },
       {
         "state": "IL",
         "name": "Illinois",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "https://www.elections.il.gov/VotingAndRegistrationSystems/PreElectionCounts.aspx",
-        "voted": 1382486,
-        "inPerson": 764924,
-        "mail": 617562,
+        "voted": 1579728,
+        "inPerson": 904143,
+        "mail": 675585,
         "turnout2022": 4144125,
         "parties": null
       },
       {
         "state": "IN",
         "name": "Indiana",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "Indiana Secretary of State",
-        "voted": 620121,
+        "voted": 803437,
         "inPerson": 0,
-        "mail": 620121,
+        "mail": 803437,
         "turnout2022": 1880755,
         "parties": null
       },
       {
         "state": "IA",
         "name": "Iowa",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "Iowa Secretary of State",
-        "notes": "Statewide and county totals, method of voting (mail vs. in-person), and party registration all come from two public JSON files the state's own Vivid dashboard uses. District (congressional/legislative), age, and district-level party breakdowns come from a separate individual-level file and may not sum to exactly the same statewide total.",
-        "voted": 440389,
-        "inPerson": 293362,
-        "mail": 147027,
+        "notes": "Utah is a universal vote-by-mail state - every \"Active\" registered voter is automatically mailed a ballot each election, and a 2025 law phasing this out does not take effect until 2029. Statewide and county \"ballots requested\" figures are therefore the number of Active registered voters by party, scraped from the Lt. Governor's current voter registration statistics page. Congressional district figures instead use accepted ballots as a stand-in, since Utah does not publish district-level registration or request data.",
+        "voted": 464008,
+        "inPerson": 314683,
+        "mail": 149325,
         "turnout2022": 1230417,
         "parties": {
-          "D": 203573,
-          "R": 150296,
-          "none": 86520
+          "D": 213835,
+          "R": 156900,
+          "none": 93273
         }
       },
       {
         "state": "KS",
         "name": "Kansas",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "Kansas Secretary of State",
-        "voted": 422143,
-        "inPerson": 345979,
-        "mail": 76164,
+        "voted": 470170,
+        "inPerson": 392184,
+        "mail": 77986,
         "turnout2022": 1008998,
         "parties": {
-          "D": 173833,
-          "R": 184102,
-          "none": 64208
+          "D": 192007,
+          "R": 203502,
+          "none": 74661
         }
       },
       {
         "state": "KY",
         "name": "Kentucky",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "https://elect.ky.gov/Pages/default.aspx",
         "notes": "Kentucky reports are typically time-stamped one day behind when they are updated to this site. The reported date is as of the upload to this site is so that site vistors can be aware when a new report is available.",
-        "voted": 192709,
-        "inPerson": 149368,
-        "mail": 43341,
+        "voted": 438602,
+        "inPerson": 390736,
+        "mail": 47866,
         "turnout2022": 1502550,
         "parties": {
-          "D": 95645,
-          "R": 83726,
-          "none": 13338
+          "D": 212561,
+          "R": 194767,
+          "none": 31274
         }
       },
       {
         "state": "LA",
         "name": "Louisiana",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://www.sos.la.gov/elections-voting/early-voting-statistics-statewide",
         "notes": "Louisiana does not publish mail ballot request data - the ballots requested figures shown for Louisiana equal ballots returned. Louisiana rreports statistics for Whites, Blacks, and other only.",
-        "voted": 530507,
+        "voted": 530514,
         "inPerson": 448586,
-        "mail": 81921,
+        "mail": 81928,
         "turnout2022": 1410466,
         "parties": {
           "D": 225951,
-          "R": 208339,
-          "none": 96217
+          "R": 208344,
+          "none": 96219
         }
       },
       {
         "state": "ME",
         "name": "Maine",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "https://www.maine.gov/sos/cec/elec/data/index.html",
-        "voted": 288672,
+        "voted": 300491,
         "inPerson": 0,
-        "mail": 288672,
+        "mail": 300491,
         "turnout2022": 680909,
         "parties": {
-          "D": 135647,
-          "R": 66001,
-          "none": 87024
+          "D": 140212,
+          "R": 68886,
+          "none": 91393
         }
       },
       {
         "state": "MD",
         "name": "Maryland",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://elections.maryland.gov/press_room/index.html",
         "notes": "Maryland reports are typically time-stamped one day behind when they are updated to this site. The reported date is as of the upload to this site is so that site vistors can be aware when a new report is available.",
-        "voted": 991069,
+        "voted": 993206,
         "inPerson": 604396,
-        "mail": 386673,
+        "mail": 388810,
         "turnout2022": 2031635,
         "parties": {
-          "D": 634589,
-          "R": 206785,
-          "none": 149695
+          "D": 635942,
+          "R": 207077,
+          "none": 150187
         }
       },
       {
         "state": "MA",
         "name": "Massachusetts",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "Massachusetts Secretary of the Commonwealth",
-        "voted": 1070364,
-        "inPerson": 336686,
-        "mail": 733678,
+        "voted": 1161295,
+        "inPerson": 347336,
+        "mail": 813959,
         "turnout2022": 2511461,
         "parties": null
       },
       {
         "state": "MI",
         "name": "Michigan",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "Data provided by Michigan Secretary of State",
         "notes": "Michigan does not identify how voters cast their ballots. The in-person numbers differ from the state's dashboard in that in-person reported here is estimated from mail ballot application data.",
-        "voted": 1858731,
-        "inPerson": 398906,
-        "mail": 1459825,
+        "voted": 2313206,
+        "inPerson": 684492,
+        "mail": 1628714,
         "turnout2022": 4500400,
         "parties": null
       },
       {
         "state": "MN",
         "name": "Minnesota",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "https://www.sos.mn.gov/election-administration-campaigns/data-maps/absentee-data/",
-        "voted": 728961,
-        "inPerson": 483520,
-        "mail": 245441,
+        "voted": 886427,
+        "inPerson": 619847,
+        "mail": 266580,
         "turnout2022": 2526646,
         "parties": null
       },
       {
         "state": "MS",
         "name": "Mississippi",
-        "updated": "2026-10-26",
-        "source": "Mississippi Secretary of State - Statewide Election Management System",
-        "voted": 56049,
+        "updated": "2026-11-02",
+        "source": "https://mailchi.mp/6261872c3b27/press-release-2026-november-general-election-absentee-report-september-1198?e=24ef845026",
+        "voted": 116453,
         "inPerson": 0,
-        "mail": 56049,
+        "mail": 116453,
         "turnout2022": 709100,
         "parties": null
       },
@@ -439,83 +457,83 @@
       {
         "state": "MT",
         "name": "Montana",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://sosmt.gov/elections/absentee-ballot-count/",
-        "voted": 300512,
+        "voted": 300609,
         "inPerson": 0,
-        "mail": 300512,
+        "mail": 300609,
         "turnout2022": 468326,
         "parties": null
       },
       {
         "state": "NE",
         "name": "Nebraska",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "Data file provided by Nebraska Secretary of State",
-        "voted": 215424,
-        "inPerson": 40860,
-        "mail": 174564,
+        "voted": 237135,
+        "inPerson": 47443,
+        "mail": 189692,
         "turnout2022": 682716,
         "parties": {
-          "D": 83442,
-          "R": 95087,
-          "none": 36895
+          "D": 91001,
+          "R": 104872,
+          "none": 41262
         }
       },
       {
         "state": "NV",
         "name": "Nevada",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "https://www.nvsos.gov/elections/election-information/vivid-project",
         "notes": "Statewide and county totals, method of voting (mail vs. in-person), and party registration all come from two public JSON files the state's own Vivid dashboard uses. District (congressional/legislative), age, and district-level party breakdowns come from a separate individual-level file and may not sum to exactly the same statewide total.",
-        "voted": 718903,
+        "voted": 732715,
         "inPerson": 308019,
-        "mail": 410884,
+        "mail": 424696,
         "turnout2022": 1023617,
         "parties": {
-          "D": 286158,
-          "R": 240733,
-          "none": 192012
+          "D": 289895,
+          "R": 246681,
+          "none": 196139
         }
       },
       {
         "state": "NJ",
         "name": "New Jersey",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "New Jersey Secretary of State",
-        "voted": 855440,
-        "inPerson": 350596,
+        "voted": 1147488,
+        "inPerson": 642644,
         "mail": 504844,
         "turnout2022": 2645539,
         "parties": {
-          "D": 509983,
-          "R": 195033,
-          "none": 150424
+          "D": 649434,
+          "R": 277298,
+          "none": 220756
         }
       },
       {
         "state": "NM",
         "name": "New Mexico",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "New Mexico Secretary of State",
-        "voted": 419434,
-        "inPerson": 350551,
-        "mail": 68883,
+        "voted": 456726,
+        "inPerson": 385114,
+        "mail": 71612,
         "turnout2022": 714754,
         "parties": {
-          "D": 218814,
-          "R": 128853,
-          "none": 71767
+          "D": 235527,
+          "R": 141691,
+          "none": 79508
         }
       },
       {
         "state": "NY",
         "name": "New York",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "New York early vote statistics provided by the State Board of elections. Mail ballot statistics are provided courtesy of the Associated Press who contacted county offices for statistics. Coverage is not complete and may vary on day of reporting.",
         "notes": "New York's daily turnout report provides a cumulative county-level total for in-person early voters only. Mail-ballot figures (request_all = ballots issued, accept_all = ballots returned, per county) come from a separate Associated Press phone-survey tracker of county election offices - 13 of 62 counties have not been reached yet as of this file and are treated as 0 for the mail component only (their in-person total is unaffected). No demographic breakdown is available for either source.",
-        "voted": 1851563,
-        "inPerson": 1705698,
+        "voted": 2110908,
+        "inPerson": 1965043,
         "mail": 145865,
         "turnout2022": 5962278,
         "parties": null
@@ -523,17 +541,17 @@
       {
         "state": "NC",
         "name": "North Carolina",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://dl.ncsbe.gov/?prefix=ENRS/2026_11_03/",
         "notes": "North Carolina provides summary ballot request statistics available for counties only. No mail ballot request statistics by district are available.",
-        "voted": 2816821,
-        "inPerson": 2724425,
-        "mail": 92396,
+        "voted": 2819922,
+        "inPerson": 2726325,
+        "mail": 93597,
         "turnout2022": 3790202,
         "parties": {
-          "D": 1080440,
-          "R": 736891,
-          "none": 999490
+          "D": 1081911,
+          "R": 737349,
+          "none": 1000662
         }
       },
       {
@@ -550,102 +568,102 @@
       {
         "state": "OH",
         "name": "Ohio",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://data.ohiosos.gov/portal/election-dashboards",
         "notes": "In-person early votes may be different than reported by the Ohio Secretary of State. They are approximated by counting a ballot sent and received on the same day as an in-person early vote.",
-        "voted": 1677822,
-        "inPerson": 1060266,
-        "mail": 617556,
+        "voted": 1728899,
+        "inPerson": 1103252,
+        "mail": 625647,
         "turnout2022": 4201368,
         "parties": null
       },
       {
         "state": "OK",
         "name": "Oklahoma",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "Oklahoma State Board of Elections",
         "notes": "Individual absentee ballot data are obtained from the Oklahoma State Board of Elections Election Data Warehouse, which enable calculation of statistics by district. The in-person early vote data are from a pdf of county-level reports that do not enable district statistics.",
-        "voted": 229151,
+        "voted": 229159,
         "inPerson": 186488,
-        "mail": 42663,
+        "mail": 42671,
         "turnout2022": 1153284,
         "parties": {
-          "D": 89504,
-          "R": 108948,
-          "none": 30699
+          "D": 89506,
+          "R": 108952,
+          "none": 30701
         }
       },
       {
         "state": "OR",
         "name": "Oregon",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "https://sos.oregon.gov/elections/Documents/2026-general-election-unofficial-ballot-returns.pdf",
-        "voted": 1181637,
+        "voted": 1294451,
         "inPerson": 0,
-        "mail": 1181637,
+        "mail": 1294451,
         "turnout2022": 1997689,
         "parties": {
-          "D": 492019,
-          "R": 368003,
-          "none": 321615
+          "D": 534509,
+          "R": 401636,
+          "none": 358306
         }
       },
       {
         "state": "PA",
         "name": "Pennsylvania",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://data.pa.gov/Government-Efficiency-Citizen-Engagement/2026-General-Election-Mail-Ballot-Requests-Departm/nbwd-pfn4/about_data",
         "notes": "The statewide and county statistics are compiled from the state dashobard. The district and age statistics are from an individual level file which may have slightly different statistics than the state's summary report, which the state did not update on Friday",
-        "voted": 1056549,
+        "voted": 1062313,
         "inPerson": 0,
-        "mail": 1056549,
+        "mail": 1062313,
         "turnout2022": 5410022,
         "parties": {
-          "D": 683968,
-          "R": 266257,
-          "none": 106324
+          "D": 687732,
+          "R": 267388,
+          "none": 107193
         }
       },
       {
         "state": "RI",
         "name": "Rhode Island",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "Rhode Island Secretary of State",
-        "voted": 116845,
-        "inPerson": 92008,
-        "mail": 24837,
+        "voted": 138314,
+        "inPerson": 112046,
+        "mail": 26268,
         "turnout2022": 361449,
         "parties": {
-          "D": 50595,
-          "R": 11304,
-          "none": 54946
+          "D": 59014,
+          "R": 13964,
+          "none": 65336
         }
       },
       {
         "state": "SC",
         "name": "South Carolina",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "https://scvotes.gov/elections-statistics/voter-participation/",
         "notes": "South Carolina's in-person early-voting total (by county) comes from a separate report with no race or Hispanic ethnicity breakdown; the race/ethnicity figures shown reflect mail ballots only.",
-        "voted": 986460,
-        "inPerson": 948592,
-        "mail": 37868,
+        "voted": 1084542,
+        "inPerson": 1043810,
+        "mail": 40732,
         "turnout2022": 1718626,
         "parties": null
       },
       {
         "state": "SD",
         "name": "South Dakota",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "South Dakota Secretary of State",
-        "voted": 73618,
+        "voted": 81367,
         "inPerson": 0,
-        "mail": 73618,
+        "mail": 81367,
         "turnout2022": 354670,
         "parties": {
-          "D": 21797,
-          "R": 39286,
-          "none": 12535
+          "D": 23476,
+          "R": 43754,
+          "none": 14137
         }
       },
       {
@@ -663,50 +681,50 @@
       {
         "state": "TX",
         "name": "Texas",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://goelect.txelections.civixapps.com/ivis-evr-ui/evr",
         "notes": "Texas does not report mail ballot requests. Requests are equal to mail ballots sent. For some counties, I may scrape directly from a county website. These do not always provide breakdowns of early voting by mail and in-person voting.",
-        "voted": 7699516,
-        "inPerson": 7431058,
-        "mail": 268458,
+        "voted": 7736594,
+        "inPerson": 7466245,
+        "mail": 270349,
         "turnout2022": 8151590,
         "parties": null
       },
       {
         "state": "UT",
         "name": "Utah",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "Utah Lt. Governor",
         "notes": "Utah is a universal vote-by-mail state - every \"Active\" registered voter is automatically mailed a ballot each election, and a 2025 law phasing this out does not take effect until 2029. Statewide and county \"ballots requested\" figures are therefore the number of Active registered voters by party, scraped from the Lt. Governor's current voter registration statistics page. Congressional district figures instead use accepted ballots as a stand-in, since Utah does not publish district-level registration or request data.",
-        "voted": 487210,
+        "voted": 487263,
         "inPerson": 13035,
-        "mail": 474175,
+        "mail": 474228,
         "turnout2022": 1084634,
         "parties": {
-          "D": 100061,
-          "R": 253863,
-          "none": 133286
+          "D": 100069,
+          "R": 253901,
+          "none": 133293
         }
       },
       {
         "state": "VT",
         "name": "Vermont",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "Data provided Vermont Secretary of State",
-        "voted": 147147,
+        "voted": 150202,
         "inPerson": 0,
-        "mail": 147147,
+        "mail": 150202,
         "turnout2022": 291955,
         "parties": null
       },
       {
         "state": "VA",
         "name": "Virginia",
-        "updated": "2026-11-01",
+        "updated": "2026-11-02",
         "source": "https://www.vpap.org/elections/early-voting/",
-        "voted": 1628158,
-        "inPerson": 1310538,
-        "mail": 317620,
+        "voted": 1630514,
+        "inPerson": 1312651,
+        "mail": 317863,
         "turnout2022": 3021956,
         "parties": null
       },
@@ -728,7 +746,7 @@
         "source": "https://sos.wv.gov/article/secretary-warner-announces-more-115000-ballots-have-been-cast-absentee-voting-and-during",
         "notes": "West Virginia publishes mail ballots requested and returned, and in-person early vote returns, by county and party. No age, gender, race, or district-level data is available.",
         "voted": 114391,
-        "inPerson": 219804,
+        "inPerson": 109902,
         "mail": 4489,
         "turnout2022": 494753,
         "parties": {
@@ -740,27 +758,27 @@
       {
         "state": "WI",
         "name": "Wisconsin",
-        "updated": "2026-10-31",
+        "updated": "2026-11-02",
         "source": "https://elections.wi.gov/resources/statistics/absentee-ballot-report-november-3-2026-general-election-0",
-        "voted": 765200,
-        "inPerson": 454384,
-        "mail": 310816,
+        "voted": 777739,
+        "inPerson": 463491,
+        "mail": 314248,
         "turnout2022": 2673154,
         "parties": null
       },
       {
         "state": "WY",
         "name": "Wyoming",
-        "updated": "2026-10-30",
+        "updated": "2026-11-02",
         "source": "Wyoming Secretary of State",
-        "voted": 57968,
+        "voted": 65264,
         "inPerson": 0,
-        "mail": 57968,
+        "mail": 65264,
         "turnout2022": 198198,
         "parties": {
-          "D": 9917,
-          "R": 43694,
-          "none": 4357
+          "D": 10976,
+          "R": 49221,
+          "none": 5067
         }
       }
     ]
