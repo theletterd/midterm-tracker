@@ -111,7 +111,7 @@ const UF_URL = 'https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.cs
 export const UF_PAGE = 'https://election.lab.ufl.edu/early-vote/2026-early-voting/'
 
 // Minimal CSV parsing: quoted fields may hold commas and doubled quotes.
-function parseCsv(text: string): Record<string, string>[] {
+export function parseCsv(text: string): Record<string, string>[] {
   const rows: string[][] = []
   let row: string[] = []
   let field = ''

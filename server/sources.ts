@@ -1,4 +1,5 @@
 import { getJson, getText } from './http.ts'
+import { parseCsv } from './turnout.ts'
 import type { Contest, Source } from './types.ts'
 
 // One adapter per feed format. Each returns every contest in the state's feed;
@@ -70,6 +71,45 @@ export function clarity(state: string, label: string, base: string, electionId: 
         total: c.TP,
         candidates: (c.CH as string[]).map((name, i) => ({ name, party: c.P[i] ?? '', votes: Number(c.V[i] ?? 0) })),
       }))
+    },
+  }
+}
+
+/** Nebraska Secretary of State: media CSV exports, one candidate per row. */
+export function nebraska(): Source {
+  const NAMES: [RegExp, (district: string) => string][] = [
+    [/^For United States Senator/i, () => 'U.S. Senator'],
+    [/^For Governor/i, () => 'Governor'],
+    [/^For Representative in Congress/i, (d) => `U.S. Representative ${d}`],
+  ]
+  return {
+    state: 'NE',
+    label: 'Nebraska Secretary of State',
+    async fetchContests() {
+      const files = await Promise.all(
+        [['SW', 'CTY'], ['CG', 'CTY']].map(([type, map]) =>
+          getText(`https://electionresults.nebraska.gov/resultsCSV.aspx?text=All&type=${type}&map=${map}`),
+        ),
+      )
+      const contests = new Map<string, Contest>()
+      for (const row of files.flatMap(parseCsv)) {
+        const nameFor = NAMES.find(([re]) => re.test(row.RaceName))?.[1]
+        if (!nameFor) continue
+        const name = nameFor(row.AreaNum.trim())
+        let c = contests.get(name)
+        if (!c) {
+          // Reporting comes through as ="12/1322".
+          const [, reported, total] = row.PrecinctsReporting.match(/(\d+)\/(\d+)/) ?? []
+          c = { name, candidates: [], reported: Number(reported), total: Number(total) }
+          contests.set(name, c)
+        }
+        c.candidates.push({
+          name: row.CandidateName.replace(/\s+/g, ' ').trim(),
+          party: row.PartyCode === 'PET' ? 'IND' : row.PartyCode, // petition candidates, e.g. Osborn
+          votes: Number(row.CandidateVotes.replace(/,/g, '')),
+        })
+      }
+      return [...contests.values()]
     },
   }
 }

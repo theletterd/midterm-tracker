@@ -1,11 +1,12 @@
-import { clarity, enhancedVoting, florida, mnsos, ncsbe, ohio, texas } from './sources.ts'
+import { clarity, enhancedVoting, florida, mnsos, nebraska, ncsbe, ohio, texas } from './sources.ts'
 import type { Source } from './types.ts'
 
 // Official state results feeds for Nov 3, 2026.
 //
 // Not covered (no live statewide feed, or not yet worked out), so enter these by hand:
 //   MI, WI, NH, ME — counties/towns report separately; the state posts totals later.
-//   AK (ranked-choice, HTML reports), KS, NV, NE, AZ, OR, MS, OK, VT.
+//   AK (ranked-choice, HTML reports), KS, NV, AZ, OR, MS, OK, VT.
+//   TX moved to a site behind a security check, so its feed below only finds old elections.
 const SC_ELECTION_ID: string | null = '127300'
 
 export const FEEDS_2026: Source[] = [
@@ -17,6 +18,7 @@ export const FEEDS_2026: Source[] = [
   ohio(),
   texas('2026', /NOVEMBER 3RD GENERAL/i),
   florida('11/3/2026'),
+  nebraska(),
 ]
 
 // The same feeds pointed at the Nov 5, 2024 general, for testing the parsers against
