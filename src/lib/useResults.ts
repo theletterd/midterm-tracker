@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import type { CallEntry, CallUpdate, Party, ResultsFile, Snapshot } from '../data/types'
+import type { CallEntry, CallUpdate, HouseTally, Party, ResultsFile, Snapshot } from '../data/types'
 import { applyCall } from './calls'
 
 const POLL_MS = 30_000
@@ -11,6 +11,7 @@ export function useResults() {
   const [data, setData] = useState<ResultsFile>({ updated: null, races: {} })
   const [history, setHistory] = useState<Record<string, Snapshot[]>>({})
   const [calls, setCalls] = useState<CallEntry[]>([])
+  const [houseTally, setHouseTally] = useState<HouseTally | null>(null)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -25,7 +26,11 @@ export function useResults() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       setData(await res.json())
       if (hist.ok) setHistory(await hist.json())
-      if (callsRes.ok) setCalls((await callsRes.json()).entries ?? [])
+      if (callsRes.ok) {
+        const file = await callsRes.json()
+        setCalls(file.entries ?? [])
+        setHouseTally(file.houseTally ?? null)
+      }
       setError(null)
     } catch (err) {
       setError(`Couldn't load results: ${err}`)
@@ -65,5 +70,5 @@ export function useResults() {
     [load],
   )
 
-  return { results: data.races, history, calls, updated: data.updated, loaded, error, saveCall, resolveCall, reload: load }
+  return { results: data.races, history, calls, houseTally, updated: data.updated, loaded, error, saveCall, resolveCall, reload: load }
 }

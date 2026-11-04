@@ -5,7 +5,7 @@ import type { Race } from '../src/data/types.ts'
 import { applyCall } from '../src/lib/calls.ts'
 import { getJson } from './http.ts'
 import { normalizeParty } from './match.ts'
-import { update, type CallEntry, type NomineesFile, type State } from './store.ts'
+import { update, type CallEntry, type HouseTally, type NomineesFile, type State } from './store.ts'
 
 // Decision Desk HQ race calls from its Bluesky account. Every call uses one template:
 //   "Decision Desk HQ projects Chris Coons wins the DE US Senate Democratic Primary
@@ -75,6 +75,20 @@ export function parsePost(text: string): ParsedCall | null {
   if (house) {
     const district = /^\d+$/.test(house[1]) ? house[1].padStart(2, '0') : 'AL'
     return { winnerName, raceId: `house-${state}-${district}`, calledAt, primary, primaryParty }
+  }
+  return null
+}
+
+// DDHQ's running count of every House seat it has called, most of which never get their own
+// call post: "DDHQ Balance of Power Update: House (8:53 PM) Democrats: 43 Republicans: 35".
+const HOUSE_TALLY = /Balance of Power Update:\s*House\s*\(([^)]+)\)\s*Democrats:\s*(\d+)\s*Republicans:\s*(\d+)/i
+
+// The newest tally among newest-first posts. A later post replaces an earlier one, including
+// when DDHQ corrects itself under the same time label.
+export function latestHouseTally(posts: Post[]): HouseTally | null {
+  for (const post of posts) {
+    const m = post.text.match(HOUSE_TALLY)
+    if (m) return { D: Number(m[2]), R: Number(m[3]), asOf: m[1].trim(), postedAt: post.createdAt, uri: post.uri }
   }
   return null
 }
@@ -219,6 +233,16 @@ export async function checkCalls(since = CALLS_SINCE): Promise<{ newCalls: numbe
     return false
   })
   const posts = await fetchPosts(since, seen)
+
+  // Tally posts aren't logged as calls, so `seen` can't find them: read the latest page instead.
+  const tally = latestHouseTally(await fetchPosts(since, new Set(), 1))
+  if (tally) {
+    await update(({ calls }) => {
+      if (calls.houseTally && calls.houseTally.postedAt >= tally.postedAt) return false
+      calls.houseTally = tally
+    })
+  }
+
   const parsed = posts
     .map((p) => ({ post: p, call: parsePost(p.text) }))
     .filter((x): x is { post: Post; call: ParsedCall } => !!x.call && !x.call.primary)

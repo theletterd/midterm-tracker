@@ -53,9 +53,19 @@ export interface CallEntry {
   reason?: string // why it needs review
 }
 
+// DDHQ's own count of the House seats it has called.
+export interface HouseTally {
+  D: number
+  R: number
+  asOf: string // as written in the post, e.g. "8:53 PM"
+  postedAt: string
+  uri: string
+}
+
 export interface CallsFile {
   checkedAt: string | null
   entries: CallEntry[] // newest first
+  houseTally?: HouseTally
 }
 
 export interface State {

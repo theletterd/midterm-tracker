@@ -26,7 +26,7 @@ function daysUntilElection(resultsUpdated: string | null) {
 }
 
 export default function App() {
-  const { results, history, calls, updated, loaded, error, saveCall, resolveCall } = useResults()
+  const { results, history, calls, houseTally, updated, loaded, error, saveCall, resolveCall } = useResults()
   const [tab, setTab] = useState<Tab>('senate')
   const [mode, setMode] = useState<Mode>('forecast')
   const [modeTouched, setModeTouched] = useState(false)
@@ -123,6 +123,14 @@ export default function App() {
           {info.chamber !== 'house' && <> Polls: RealClearPolling, pulled {fmtDate(POLLS_AS_OF)}.</>}
           {info.need && <> The line marks {info.need.D} seats for a Democratic majority{info.chamber === 'senate' && ' (VP Vance breaks 50–50 ties for the GOP)'}.</>}
         </p>
+        {info.chamber === 'house' && mode === 'results' && houseTally && (
+          <p className="source muted">
+            <a href={`https://bsky.app/profile/${houseTally.uri.split('/')[2]}/post/${houseTally.uri.split('/').pop()}`} target="_blank" rel="noreferrer">
+              Decision Desk HQ's own count
+            </a>
+            : <b className="name-D">{houseTally.D} D</b>, <b className="name-R">{houseTally.R} R</b> as of {houseTally.asOf} ET. It posts only some House calls individually, so the board above runs behind it.
+          </p>
+        )}
       </section>
 
       {mode === 'results' && <CallFeed calls={calls} onResolve={resolveCall} onOpenRace={setEditing} />}

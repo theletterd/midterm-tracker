@@ -74,6 +74,14 @@ export interface CallEntry {
   reason?: string
 }
 
+export interface HouseTally {
+  D: number
+  R: number
+  asOf: string
+  postedAt: string
+  uri: string
+}
+
 export interface ResultsFile {
   updated: string | null
   races: Record<string, Result>
