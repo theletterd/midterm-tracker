@@ -6,11 +6,7 @@ import type { Source } from './types.ts'
 // Not covered (no live statewide feed, or not yet worked out), so enter these by hand:
 //   MI, WI, NH, ME — counties/towns report separately; the state posts totals later.
 //   AK (ranked-choice, HTML reports), KS, NV, NE, AZ, OR, MS, OK, VT.
-//
-// South Carolina uses Clarity but hadn't published its 2026 election id as of Nov 1.
-// Once it's live, open https://www.enr-scvotes.org/SC/ , click the 2026 General Election,
-// and paste the number from the URL (…/SC/<id>/…) below.
-const SC_ELECTION_ID: string | null = null
+const SC_ELECTION_ID: string | null = '127300'
 
 export const FEEDS_2026: Source[] = [
   ncsbe('20261103'),
